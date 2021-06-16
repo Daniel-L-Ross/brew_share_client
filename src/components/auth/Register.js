@@ -1,5 +1,6 @@
 import React, { useRef } from "react"
 import { Link, useHistory } from "react-router-dom"
+import { authApi, userIdStorageKey, userTokenStorageKey } from "./authSettings"
 import "./Auth.css"
 
 export const Register = (props) => {
@@ -26,7 +27,7 @@ export const Register = (props) => {
                 "bio": bio.current.value
             }
 
-            return fetch("http://127.0.0.1:8000/register", {
+            return fetch(`${authApi.localApiBaseUrl}/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -37,8 +38,8 @@ export const Register = (props) => {
                 .then(res => res.json())
                 .then(res => {
                     if ("valid" in res && res.valid) {
-                        localStorage.setItem("brew_share_token", res.token )
-                        localStorage.setItem("brewerId", res.id)
+                        localStorage.setItem(userTokenStorageKey, res.token )
+                        localStorage.setItem(userIdStorageKey, res.id)
                         localStorage.setItem("isAdmin", res.isAdmin)
                         history.push("/")
                     }
