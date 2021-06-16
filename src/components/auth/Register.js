@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { authApi, userIdStorageKey, userTokenStorageKey } from "./authSettings"
+import { createImageString } from "../ImageUploadHandler"
 import "./Auth.css"
 
 export const Register = (props) => {
@@ -17,19 +18,6 @@ export const Register = (props) => {
 
     const history = useHistory()
     
-    const getBase64 = (file, callback) => {
-        const reader = new FileReader()
-        reader.addEventListener('load', () => callback(reader.result))
-        reader.readAsDataURL(file)
-    }
-
-    const createImageString = (file, setVar) => {
-        getBase64(file, (base64ImageString) => {
-            console.log("Base64 of file is", base64ImageString);
-            setVar(base64ImageString)
-        });
-    }
-
     const updateImageString = (event) => {
         createImageString(event.target.files[0], setImageString)
     }
