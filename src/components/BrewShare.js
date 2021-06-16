@@ -4,25 +4,23 @@ import { ApplicationViews } from "./ApplicationViews"
 // import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
+import { userIdStorageKey } from "./auth/authSettings"
 
 export const BrewShare = () => (
     <>
         <Route render={() => {
-            if (localStorage.getItem("brew_share_user_id")) {
+            if (localStorage.getItem(userIdStorageKey)) {
                 return <>
                     {/* <NavBar /> */}
                     <ApplicationViews />
                     </>
             } else {
-                return <>
-                {/* <NavBar /> */}
-                <ApplicationViews />
-                </> 
+                return <Redirect to="/login" />
             }
         }} />
 
         <Route path="/login" render={() => {
-            if (localStorage.getItem("brew_share_user_id")) {
+            if (localStorage.getItem(userIdStorageKey)) {
                 return <Redirect to="/" />
             } else {
                 return <Login />
@@ -30,7 +28,7 @@ export const BrewShare = () => (
         }} />
 
         <Route path="/register" render={() => {
-            if (localStorage.getItem("brew_share_user_id")) {
+            if (localStorage.getItem(userIdStorageKey)) {
                 return <Redirect to="/" />
             } else {
                 return <Register />
