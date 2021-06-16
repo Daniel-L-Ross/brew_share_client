@@ -1,6 +1,7 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { authApi, userIdStorageKey, userTokenStorageKey } from "./authSettings"
+import { createImageString } from "../ImageUploadHandler"
 import "./Auth.css"
 
 export const Register = (props) => {
@@ -8,23 +9,33 @@ export const Register = (props) => {
     const lastName = useRef()
     const email = useRef()
     const bio = useRef()
+    const [imageString, setImageString] = useState('')
+    const currentCoffee = useRef()
+    const currentBrewMethod = useRef()
     const password = useRef()
     const verifyPassword = useRef()
     const passwordDialog = useRef()
+
     const history = useHistory()
     
+    const updateImageString = (event) => {
+        createImageString(event.target.files[0], setImageString)
+    }
+
     const handleRegister = (e) => {
         e.preventDefault()
         
-
         if (password.current.value === verifyPassword.current.value) {
             const newUser = {
-                "username": email.current.value,
                 "first_name": firstName.current.value,
                 "last_name": lastName.current.value,
                 "email": email.current.value,
+                "username": email.current.value,
+                "bio": bio.current.value,
+                "currentCoffee": currentCoffee.current.value,
+                "currentBrewMethod": currentBrewMethod.current.value,
+                "profileImage": imageString,
                 "password": password.current.value,
-                "bio": bio.current.value
             }
 
             return fetch(`${authApi.localApiBaseUrl}/register`, {
@@ -74,6 +85,18 @@ export const Register = (props) => {
                 <fieldset>
                     <label htmlFor="bio"> Bio </label>
                     <input ref={bio} type="bio" name="bio" className="form-control" placeholder="Bio" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="currentCoffee"> Current Coffee </label>
+                    <input ref={currentCoffee} type="currentCoffee" name="currentCoffee" className="form-control" placeholder="Current coffee" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="currentBrewMethod"> Current Brewing Method </label>
+                    <input ref={currentBrewMethod} type="currentBrewMethod" name="currentBrewMethod" className="form-control" placeholder="Brew method" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="profileImage"> Profile Image </label>
+                    <input type="file" name="profileImage" className="form-control" onChange={updateImageString} />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputPassword"> Password </label>
