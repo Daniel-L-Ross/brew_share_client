@@ -1,14 +1,18 @@
 import React from "react"
 import { Route } from "react-router-dom"
+import { CoffeeProvider } from "./coffee/CoffeeProvider"
+import { CoffeeList } from "./coffee/CoffeeList"
 import { EntryDetail } from "./entries/EntryDetail"
 import { EntryList } from "./entries/EntryList"
 import { EntryProvider } from "./entries/EntryProvider"
+import { NavBar } from "./nav/NavBar"
 
 
 export const ApplicationViews = () => {
     return <>
 
-    <h1>Navbar renders here</h1>
+    <NavBar />
+    
     <EntryProvider>
         <Route exact path="/">
             <EntryList />
@@ -18,5 +22,12 @@ export const ApplicationViews = () => {
             <EntryDetail />
         </Route>
     </EntryProvider>
+
+    <CoffeeProvider>
+        <Route exact path="/coffees">
+            <CoffeeList/>
+        </Route>
+    </CoffeeProvider>
+
     </>
 }
