@@ -1,6 +1,7 @@
 import React from "react"
 import { Route } from "react-router-dom"
 import { CoffeeProvider } from "./coffee/CoffeeProvider"
+import { CoffeeDetail } from "./coffee/CoffeeDetail"
 import { CoffeeList } from "./coffee/CoffeeList"
 import { EntryDetail } from "./entries/EntryDetail"
 import { EntryList } from "./entries/EntryList"
@@ -26,6 +27,10 @@ export const ApplicationViews = () => {
     <CoffeeProvider>
         <Route exact path="/coffees">
             <CoffeeList/>
+        </Route>
+        
+        <Route exact path="/coffees/:coffeeId(\d+)">
+            <CoffeeDetail/>
         </Route>
     </CoffeeProvider>
 

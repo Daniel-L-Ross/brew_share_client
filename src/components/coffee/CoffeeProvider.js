@@ -15,10 +15,19 @@ export const CoffeeProvider = (props) => {
             .then(res => res.json())
             .then(setCoffees)
     }
+    
+    const getSingleCoffee = (coffeeId) => {
+        return fetch(`${authApi.localApiBaseUrl}/coffees/${coffeeId}`, {
+            headers: {
+                "Authorization": `Token ${apiAuthorizationRequest}`
+            }
+        })
+            .then(res => res.json())
+    }
 
     return (
         <CoffeeContext.Provider value={{
-            coffees, getCoffees
+            coffees, getCoffees, getSingleCoffee
         }}>
             {props.children}
             </CoffeeContext.Provider>
