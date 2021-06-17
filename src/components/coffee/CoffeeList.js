@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react"
-import { Link, userHistory, useParams } from "react-router-dom"
+import { Link, userHistory, useParams, useHistory } from "react-router-dom"
 import { CoffeeContext } from "./CoffeeProvider"
 
 export const CoffeeList = () => {
     const { coffees, getCoffees } = useContext(CoffeeContext)
-
+    const history = useHistory()
     useEffect(() => {
         getCoffees()
     }, [])
@@ -12,6 +12,7 @@ export const CoffeeList = () => {
     return (
         <>
             <h2>Coffee List</h2>
+            <button onClick={()=> history.push("/coffees/add")}> Add New Coffee </button>
             {
                 coffees.map(coffee => {
                     return <div key={`coffee--${coffee.id}`}>
