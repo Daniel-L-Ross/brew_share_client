@@ -3,12 +3,13 @@ import { Route } from "react-router-dom"
 import { EntryDetail } from "./entries/EntryDetail"
 import { EntryList } from "./entries/EntryList"
 import { EntryProvider } from "./entries/EntryProvider"
+import { NavBar } from "./nav/NavBar"
 
 
 export const ApplicationViews = () => {
     return <>
 
-    <h1>Navbar renders here</h1>
+    <NavBar />
     <EntryProvider>
         <Route exact path="/">
             <EntryList />
