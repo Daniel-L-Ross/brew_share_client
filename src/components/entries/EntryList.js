@@ -11,7 +11,14 @@ export const EntryList = () => {
     }, [])
     return (
         <>
-        <h2>Entry List</h2>
+            <h2>Entry List</h2>
+            {
+                entries.map(entry => {
+                    return <div>
+                        <h3>{entry.title}</h3>
+                    </div>
+                })
+            }
         </>
     )
 }
