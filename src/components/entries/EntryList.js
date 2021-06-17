@@ -15,7 +15,8 @@ export const EntryList = () => {
             {
                 entries.map(entry => {
                     return <div>
-                        <h3>{entry.title}</h3>
+                        <h3>{entry.title} | {entry.brewer.user.first_name}</h3>
+                        <p>{entry.coffee.roaster} {entry.coffee.name} - {entry.method.name}</p>
                     </div>
                 })
             }
