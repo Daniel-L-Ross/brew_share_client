@@ -1,6 +1,6 @@
 import React, { useRef } from "react"
 import { Link, useHistory } from "react-router-dom"
-import { authApi, userIdStorageKey, userTokenStorageKey } from "./authSettings"
+import { authApi, userTokenStorageKey } from "./authSettings"
 import "./Auth.css"
 
 
@@ -29,7 +29,6 @@ export const Login = () => {
             .then(res => {
                 if ("valid" in res && res.valid) {
                     localStorage.setItem(userTokenStorageKey, res.token )
-                    localStorage.setItem(userIdStorageKey, res.id)
                     localStorage.setItem("isAdmin", res.isAdmin)
                     history.push("/")
                 }
