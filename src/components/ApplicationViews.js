@@ -1,5 +1,6 @@
 import React from "react"
 import { Route } from "react-router-dom"
+import { EntryDetail } from "./entries/EntryDetail"
 import { EntryList } from "./entries/EntryList"
 import { EntryProvider } from "./entries/EntryProvider"
 
@@ -11,6 +12,10 @@ export const ApplicationViews = () => {
     <EntryProvider>
         <Route exact path="/">
             <EntryList />
+        </Route>
+
+        <Route path="/entries/:entryId(\d+)">
+            <EntryDetail />
         </Route>
     </EntryProvider>
     </>

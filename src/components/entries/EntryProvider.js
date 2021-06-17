@@ -16,9 +16,19 @@ export const EntryProvider = (props) => {
             .then(setEntries)
     }
 
+    const getSingleEntry = (entryId) => {
+        return fetch(`${authApi.localApiBaseUrl}/entries/${entryId}`, {
+            headers: {
+                "Authorization": `Token ${apiAuthorizationRequest}`
+            }
+        })
+            .then(res => res.json())
+    }
+
+
     return (
         <EntryContext.Provider value={{
-            entries, getEntries
+            entries, getEntries, getSingleEntry
         }}>
             {props.children}
         </EntryContext.Provider>
