@@ -5,6 +5,6 @@ export const authApi = {
 }
 
 // The user id is saved under the key brewer_id in session Storage. Change below if needed!
-export const userIdStorageKey = "brewer_id"
 export const userTokenStorageKey = "brew_share_token"
+export const apiAuthorizationRequest = localStorage.getItem(userTokenStorageKey)
 export const userIsAdmin = JSON.parse(localStorage.getItem("isAdmin"))

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react"
 import { Link, useHistory } from "react-router-dom"
-import { authApi, userIdStorageKey, userTokenStorageKey } from "./authSettings"
+import { authApi, userTokenStorageKey } from "./authSettings"
 import { createImageString } from "../ImageUploadHandler"
 import "./Auth.css"
 
@@ -50,7 +50,6 @@ export const Register = (props) => {
                 .then(res => {
                     if ("valid" in res && res.valid) {
                         localStorage.setItem(userTokenStorageKey, res.token )
-                        localStorage.setItem(userIdStorageKey, res.id)
                         localStorage.setItem("isAdmin", res.isAdmin)
                         history.push("/")
                     }
