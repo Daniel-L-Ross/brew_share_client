@@ -7,7 +7,7 @@ export const CoffeeList = () => {
 
     useEffect(() => {
         getCoffees()
-    })
+    }, [])
 
     return (
         <>
