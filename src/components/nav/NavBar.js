@@ -24,7 +24,11 @@ export const NavBar = () => {
 
             <li className="navbar__item">My Favorites</li>
 
-            <li className="navbar__item">Coffee</li>
+            <li className="navbar__item">
+                <Link to="/coffees">
+                    Coffee
+                </Link>
+            </li>
 
             <li className="navbar__item">Brew Methods</li>
         </ul>
