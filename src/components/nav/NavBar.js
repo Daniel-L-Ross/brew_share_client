@@ -30,7 +30,11 @@ export const NavBar = () => {
                 </Link>
             </li>
 
-            <li className="navbar__item">Brew Methods</li>
+            <li className="navbar__item">
+                <Link to="/brew-methods">
+                    Brew Methods
+                </Link>
+            </li>
         </ul>
     )
 }
