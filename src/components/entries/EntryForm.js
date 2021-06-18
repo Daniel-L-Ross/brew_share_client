@@ -5,6 +5,7 @@ import { BrewMethodContext } from "../brewMethods/BrewMethodProvider"
 import { useHistory, useParams } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import "../auth/Auth.css"
+import "./Entry.css"
 
 export const EntryForm = () => {
     const history = useHistory()
@@ -57,56 +58,85 @@ export const EntryForm = () => {
                 <h1 className="h3 mb-3 font-weight-normal">Add New Entry</h1>
                 <fieldset>
                     <label htmlFor="title"> Entry Title </label>
-                    <input type="text" name="title" id="title" className="form-control" placeholder="Title" {...register("title", {required: "Please add a title to the post"})}  />
+                    <input type="text" className="form-control" placeholder="Title" {...register("title", {required: true, maxLength: 50})}  />
                 </fieldset>
+
                 <fieldset>
-                    <label htmlFor="coffee"> coffee </label>
-                    <input type="select" name="coffee" id="coffee" className="form-control" placeholder="coffee"  required />
+                    <label htmlFor="coffee"> Coffee </label>
+                    <select className="form-control" {...register("coffee", {required: true})} >
+                        <option value={0}>Please select a coffee</option>
+                        {
+                            coffees.map(coffee => {
+                                return <option value={coffee.id}>{coffee.roaster} {coffee.name}</option>
+                            })
+                        }
+                    </select>
                 </fieldset>
+
                 <fieldset>
-                    <label htmlFor="grindSize"> grindSize </label>
-                    <input type="url" name="grindSize" id="grindSize" className="form-control" placeholder="grindSize"  required />
+                    <label htmlFor="grindSize"> Grind Size </label>
+                    <input type="text" className="form-control" placeholder="medium-fine" {...register("grindSize", {required: true, maxLength: 25})}/>
                 </fieldset>
+
                 <fieldset>
-                    <label htmlFor="coffeeAmount"> coffeeAmount </label>
-                    <input type="url" name="coffeeAmount" id="coffeeAmount" className="form-control" placeholder="coffeeAmount"  required />
+                    <label htmlFor="coffeeAmount"> Grams coffee </label>
+                    <input type="number" className="form-control" placeholder="Enter a number..." {...register("coffeeAmount", {required: true})}/>
                 </fieldset>
+
                 <fieldset>
                     <label htmlFor="method"> Brew Method </label>
-                    <input type="file" name="method" id="method" className="form-control"  />
+                    <select className="form-control" {...register("method", {required: true})} >
+                        <option value={0}>Please select a Brewing Method</option>
+                        {
+                            brewMethods.map(method => {
+                                return <option value={method.id}>{method.name}</option>
+                            })
+                        }
+                    </select>
                 </fieldset>
+
                 <fieldset>
-                    <label htmlFor="waterTemp"> waterTemp </label>
-                    <input type="url" name="waterTemp" id="waterTemp" className="form-control" placeholder="waterTemp"  required />
+                    <label htmlFor="waterTemp"> Water temp (fahrenheit) </label>
+                    <input type="number" className="form-control" placeholder="Enter a number..." {...register("waterTemp", {required:true, max:212})}/>
                 </fieldset>
+                
                 <fieldset>
-                    <label htmlFor="waterVolume"> waterVolume </label>
-                    <input type="url" name="waterVolume" id="waterVolume" className="form-control" placeholder="waterVolume"  required />
+                    <label htmlFor="waterVolume"> Water volume (grams) </label>
+                    <input type="number" className="form-control" placeholder="Enter a number..." {...register("waterVolume", {required:true})}/>
                 </fieldset>
+
                 <fieldset>
-                    <label htmlFor="tastingNotes"> tastingNotes </label>
-                    <input type="url" name="tastingNotes" id="tastingNotes" className="form-control" placeholder="tastingNotes"  required />
+                    <label htmlFor="tastingNotes"> Tasting Notes </label>
+                    <input type="text" className="form-control" placeholder="Tasting notes (optional)" {...register("TastingNotes", {maxLength: 50})}/>
                 </fieldset>
+
                 <fieldset>
-                    <label htmlFor="review"> review </label>
-                    <input type="url" name="review" id="review" className="form-control" placeholder="review"  required />
+                    <label htmlFor="review"> Review your brew  </label>
+                    <textarea type="text" className="form-control" placeholder="Your review (optional)" {...register("review", {maxLength: 255})}/>
                 </fieldset>
+
                 <fieldset>
-                    <label htmlFor="rating"> rating </label>
-                    <input type="url" name="rating" id="rating" className="form-control" placeholder="rating"  required />
+                    <label htmlFor="rating"> Rating (1-5) </label>
+                    <input type="number" className="form-control"  {...register("rating", { min: 1, max:5 })} />
                 </fieldset>
+
                 <fieldset>
-                    <label htmlFor="setup"> setup </label>
-                    <input type="url" name="setup" id="setup" className="form-control" placeholder="setup"  required />
+                    <label htmlFor="setup"> Setup notes </label>
+                    <textarea type="text" className="form-control" placeholder="Ex: Rinse filter and dispose of water. " {...register("setup", {required: true, maxLength: 255})}/>
                 </fieldset>
+
                 <fieldset>
-                    <label htmlFor="private"> private </label>
-                    <input type="url" name="private" id="private" className="form-control" placeholder="private"  required />
+                    <label htmlFor="private"> Privacy </label>
+                    <select className="form-control"  {...register("private")} >
+                        <option value={false}>Public</option>
+                        <option value={true}>Private</option>
+                    </select>
                 </fieldset>
+
                 <fieldset style={{
                     textAlign: "center"
                 }}>
-                    <button className="btn btn-1 btn-sep icon-send" type="submit">Add Brew Method</button>
+                    <button className="btn btn-1 btn-sep icon-send" type="submit">Save Entry</button>
                 </fieldset>
             </form>
 
