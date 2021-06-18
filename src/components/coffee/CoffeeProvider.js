@@ -29,6 +29,7 @@ export const CoffeeProvider = (props) => {
         return fetch(`${authApi.localApiBaseUrl}/coffees`, {
             method: "POST",
             headers: {
+                "Content-Type": "application/json",
                 "Authorization": `Token ${apiAuthorizationRequest}`
             },
             body: JSON.stringify(coffeeObject)
