@@ -5,8 +5,11 @@ import { createImageString } from "../ImageUploadHandler"
 import "../auth/Auth.css"
 
 export const CoffeeForm = () => {
+    const history = useHistory()
+    const { addCoffee } = useContext(CoffeeContext)
     const [coffeeImage, setCoffeeImage] = useState(""
     )
+
     const [coffee, setCoffee] = useState({
         roaster: "",
         name: "",
@@ -18,7 +21,6 @@ export const CoffeeForm = () => {
         tastingNotes: "",
     })
 
-
     const handleControlledInputChange = (event) => {
         if (event.target.id === "coffeeImage") {
             createImageString(event.target.files[0], setCoffeeImage)
@@ -27,14 +29,15 @@ export const CoffeeForm = () => {
             newCoffee[event.target.id] = event.target.value
             setCoffee(newCoffee)
         }
-
     }
 
     const handleCoffeeSubmit = () => {
-        console.log("Form submitted")
+        const newCoffee = { ...coffee }
+        newCoffee.coffeeImage = coffeeImage
+        addCoffee(newCoffee)
+        .then(setCoffee)
+        .then(() => history.push(`coffee/${coffee.id}/detail`))
     }
-
-
 
     return (
         <main style={{ textAlign: "center" }}>
@@ -57,7 +60,7 @@ export const CoffeeForm = () => {
 
                 <fieldset>
                     <label htmlFor="country"> Country </label>
-                    <input type="text" name="country" className="form-control" placeholder="Xountry" required />
+                    <input type="text" name="country" className="form-control" placeholder="Country" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="region"> Region </label>
