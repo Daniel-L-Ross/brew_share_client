@@ -25,6 +25,15 @@ export const CoffeeProvider = (props) => {
             .then(res => res.json())
     }
 
+    const addCoffee = (coffeeObject) => {
+        return fetch(`${authApi.localApiBaseUrl}/coffees`, {
+            headers: {
+                "Authorization": `Token ${apiAuthorizationRequest}`
+            }
+        })
+            .then(res => res.json())
+    }
+
     return (
         <CoffeeContext.Provider value={{
             coffees, getCoffees, getSingleCoffee

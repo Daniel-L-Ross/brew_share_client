@@ -5,11 +5,28 @@ import { createImageString } from "../ImageUploadHandler"
 import "../auth/Auth.css"
 
 export const CoffeeForm = () => {
+    const [coffeeImage, setCoffeeImage] = useState(""
+    )
     const [coffee, setCoffee] = useState({
-
+        roaster: "",
+        name: "",
+        website: "",
+        country: "",
+        region: "",
+        process: "",
+        recommendedMethod: "",
+        tastingNotes: "",
     })
 
-    const updateImageString = (event) => {
+
+    const handleControlledInputChange = (event) => {
+        if (event.target.id === "coffeeImage") {
+            createImageString(event.target.files[0], setCoffeeImage)
+        } else {
+            const newCoffee = { ...coffee }
+            newCoffee[event.target.id] = event.target.value
+            setCoffee(newCoffee)
+        }
 
     }
 
@@ -24,38 +41,43 @@ export const CoffeeForm = () => {
 
 
             <form className="form--login" onSubmit={handleCoffeeSubmit}>
-                <h1 className="h3 mb-3 font-weight-normal">Register an account</h1>
+                <h1 className="h3 mb-3 font-weight-normal">Add a New Coffee</h1>
                 <fieldset>
-                    <label htmlFor="firstName"> First Name </label>
-                    <input type="text" name="firstName" className="form-control" placeholder="First name" required autoFocus />
+                    <label htmlFor="roaster"> Roaster </label>
+                    <input type="text" name="roaster" id="roaster" className="form-control" placeholder="Roaster" required autoFocus />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="lastName"> Last Name </label>
-                    <input type="text" name="lastName" className="form-control" placeholder="Last name" required />
+                    <label htmlFor="name"> Name </label>
+                    <input type="text" name="name" id="name" className="form-control" placeholder="Name" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="inputEmail"> Email address </label>
-                    <input type="email" name="email" className="form-control" placeholder="Email address" required />
+                    <label htmlFor="website"> Website </label>
+                    <input type="url" name="website" id="website" className="form-control" placeholder="Website/Link" required />
+                </fieldset>
+
+                <fieldset>
+                    <label htmlFor="country"> Country </label>
+                    <input type="text" name="country" className="form-control" placeholder="Xountry" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="bio"> Bio </label>
-                    <input type="bio" name="bio" className="form-control" placeholder="Bio" required />
+                    <label htmlFor="region"> Region </label>
+                    <input type="text" name="region" className="form-control" placeholder="Region" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="currentCoffee"> Current Coffee </label>
-                    <input type="currentCoffee" name="currentCoffee" className="form-control" placeholder="Current coffee" required />
+                    <label htmlFor="process"> Process </label>
+                    <input type="text" name="process" className="form-control" placeholder="Process" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="currentBrewMethod"> Current Brewing Method </label>
-                    <input type="currentBrewMethod" name="currentBrewMethod" className="form-control" placeholder="Brew method" required />
+                    <label htmlFor="recommendedMethod"> Recommended Brewing Method(s) </label>
+                    <input type="text" name="recommendedMethod" className="form-control" placeholder="Brew Method" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="profileImage"> Profile Image </label>
-                    <input type="file" name="profileImage" className="form-control" onChange={updateImageString} />
+                    <label htmlFor="tastingNotes"> Tasting Notes </label>
+                    <input type="text" name="tastingNotes" className="form-control" placeholder="Tasting Notes" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="inputPassword"> Password </label>
-                    <input type="password" name="password" className="form-control" placeholder="Password" required />
+                    <label htmlFor="coffeeImage"> Coffee Image (optional) </label>
+                    <input type="file" id="coffeeImage" name="coffeeImage" className="form-control" onChange={handleControlledInputChange} />
                 </fieldset>
                 <fieldset style={{
                     textAlign: "center"

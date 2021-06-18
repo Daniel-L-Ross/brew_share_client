@@ -26,15 +26,15 @@ export const ApplicationViews = () => {
     </EntryProvider>
 
     <CoffeeProvider>
-        <Route exact path="/coffees">
+        <Route exact path="/coffee">
             <CoffeeList/>
         </Route>
         
-        <Route exact path="/coffees/:coffeeId(\d+)">
+        <Route exact path="/coffee/:coffeeId(\d+)">
             <CoffeeDetail/>
         </Route>
 
-        <Route exact path="/coffees/add">
+        <Route exact path="/coffee/add">
             <CoffeeForm />
         </Route>
     </CoffeeProvider>

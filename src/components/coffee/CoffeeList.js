@@ -12,11 +12,11 @@ export const CoffeeList = () => {
     return (
         <>
             <h2>Coffee List</h2>
-            <button onClick={()=> history.push("/coffees/add")}> Add New Coffee </button>
+            <button onClick={()=> history.push("/coffee/add")}> Add New Coffee </button>
             {
                 coffees.map(coffee => {
                     return <div key={`coffee--${coffee.id}`}>
-                        <Link to={`/coffees/${coffee.id}`}>
+                        <Link to={`/coffee/${coffee.id}`}>
                             <h3>{coffee.roaster} {coffee.name}</h3>
                         </Link>
 

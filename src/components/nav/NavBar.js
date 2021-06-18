@@ -25,7 +25,7 @@ export const NavBar = () => {
             <li className="navbar__item">My Favorites</li>
 
             <li className="navbar__item">
-                <Link to="/coffees">
+                <Link to="/coffee">
                     Coffee
                 </Link>
             </li>
