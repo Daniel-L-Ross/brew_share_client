@@ -9,7 +9,6 @@ const getBase64 = (file, callback) => {
 // accepts the file and useState SET function to update a state variable
 export const createImageString = (file, setVar) => {
     getBase64(file, (base64ImageString) => {
-        console.log("Base64 of file is", base64ImageString);
         setVar(base64ImageString)
     });
 }

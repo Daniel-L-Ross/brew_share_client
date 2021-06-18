@@ -30,7 +30,7 @@ export const ApplicationViews = () => {
             <CoffeeList/>
         </Route>
         
-        <Route exact path="/coffee/:coffeeId(\d+)">
+        <Route exact path="/coffee/:coffeeId(\d+)/detail">
             <CoffeeDetail/>
         </Route>
 

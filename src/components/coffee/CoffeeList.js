@@ -16,7 +16,7 @@ export const CoffeeList = () => {
             {
                 coffees.map(coffee => {
                     return <div key={`coffee--${coffee.id}`}>
-                        <Link to={`/coffee/${coffee.id}`}>
+                        <Link to={`/coffee/${coffee.id}/detail`}>
                             <h3>{coffee.roaster} {coffee.name}</h3>
                         </Link>
 

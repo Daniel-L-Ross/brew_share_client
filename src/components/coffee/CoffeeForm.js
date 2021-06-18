@@ -31,13 +31,12 @@ export const CoffeeForm = () => {
         }
     }
 
-    const handleCoffeeSubmit = () => {
+    const handleCoffeeSubmit = (event) => {
+        event.preventDefault()
         const newCoffee = { ...coffee }
         newCoffee.coffeeImage = coffeeImage
-        debugger
         addCoffee(newCoffee)
-        .then(setCoffee)
-        .then(() => history.push(`/coffee/${coffee.id}/detail`))
+        .then(new_coffee => history.push(`/coffee/${new_coffee.id}/detail`))
     }
 
     return (
