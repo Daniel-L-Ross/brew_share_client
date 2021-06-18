@@ -2,3 +2,7 @@ textarea {
 	min-height: 5em;
 	max-height: 50vh;
 }
+
+.error-message {
+    color: red
+}

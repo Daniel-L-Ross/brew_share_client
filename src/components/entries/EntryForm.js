@@ -37,17 +37,9 @@ export const EntryForm = () => {
 
     })
 
-    const handleControlledInputChange = (event) => {
-            const newEntry = { ...entry }
-            newEntry[event.target.id] = event.target.value
-            setEntry(newEntry)
-    }
-
-    const handleEntrySubmit = (event) => {
-        event.preventDefault()
-        const newEntry = { ...entry }
+    const handleEntrySubmit = (newEntry) => {
         addEntry(newEntry)
-        .then(() => history.push("/brew-methods"))
+            .then(entry => history.push(`/entries/${entry.id}/detail`))
     }
 
     return (
@@ -58,13 +50,15 @@ export const EntryForm = () => {
                 <h1 className="h3 mb-3 font-weight-normal">Add New Entry</h1>
                 <fieldset>
                     <label htmlFor="title"> Entry Title </label>
-                    <input type="text" className="form-control" placeholder="Title" {...register("title", {required: true, maxLength: 50})}  />
+                    {errors.title && <p className="error-message">{errors.title.message}</p>}
+                    <input type="text" className="form-control" placeholder="Title" {...register("title", { required: "Please add a title to your entry", maxLength: 50 })} />
                 </fieldset>
 
                 <fieldset>
                     <label htmlFor="coffee"> Coffee </label>
-                    <select className="form-control" {...register("coffee", {required: true})} >
-                        <option value={0}>Please select a coffee</option>
+                    {errors.coffee && <p className="error-message">{errors.coffee.message}</p>}
+                    <select className="form-control" {...register("coffee", { required: "Please select a coffee" })} >
+                        <option value="">Please select a coffee</option>
                         {
                             coffees.map(coffee => {
                                 return <option value={coffee.id}>{coffee.roaster} {coffee.name}</option>
@@ -75,18 +69,21 @@ export const EntryForm = () => {
 
                 <fieldset>
                     <label htmlFor="grindSize"> Grind Size </label>
-                    <input type="text" className="form-control" placeholder="medium-fine" {...register("grindSize", {required: true, maxLength: 25})}/>
+                        {errors.grindSize && <p className="error-message">{errors.grindSize.message}</p>}
+                    <input type="text" className="form-control" placeholder="medium-fine" {...register("grindSize", { required: "Please provide the grind size used", maxLength: 25 })} />
                 </fieldset>
 
                 <fieldset>
                     <label htmlFor="coffeeAmount"> Grams coffee </label>
-                    <input type="number" className="form-control" placeholder="Enter a number..." {...register("coffeeAmount", {required: true})}/>
+                        {errors.coffeeAmount && <p className="error-message">{errors.coffeeAmount.message}</p>}
+                    <input type="number" className="form-control" placeholder="Enter a number..." {...register("coffeeAmount", { required: "Please add the amount of coffee used" })} />
                 </fieldset>
 
                 <fieldset>
                     <label htmlFor="method"> Brew Method </label>
-                    <select className="form-control" {...register("method", {required: true})} >
-                        <option value={0}>Please select a Brewing Method</option>
+                        {errors.method && <p className="error-message">{errors.method.message}</p>}
+                    <select className="form-control" {...register("method", { required: "Please select a brewing method" })} >
+                        <option value="">Please select a Brewing Method</option>
                         {
                             brewMethods.map(method => {
                                 return <option value={method.id}>{method.name}</option>
@@ -97,39 +94,43 @@ export const EntryForm = () => {
 
                 <fieldset>
                     <label htmlFor="waterTemp"> Water temp (fahrenheit) </label>
-                    <input type="number" className="form-control" placeholder="Enter a number..." {...register("waterTemp", {required:true, max:212})}/>
+                        {errors.waterTemp && <p className="error-message">{errors.waterTemp.message}</p>}
+                    <input type="number" className="form-control" placeholder="Enter a number..." {...register("waterTemp", { required: "Please provide the water temp used", max: 212 })} />
                 </fieldset>
-                
+
                 <fieldset>
                     <label htmlFor="waterVolume"> Water volume (grams) </label>
-                    <input type="number" className="form-control" placeholder="Enter a number..." {...register("waterVolume", {required:true})}/>
+                        {errors.waterVolume && <p className="error-message">{errors.waterVolume.message}</p>}
+                    <input type="number" className="form-control" placeholder="Enter a number..." {...register("waterVolume", { required: "Please provide the amount of water used" })} />
                 </fieldset>
 
                 <fieldset>
                     <label htmlFor="tastingNotes"> Tasting Notes </label>
-                    <input type="text" className="form-control" placeholder="Tasting notes (optional)" {...register("TastingNotes", {maxLength: 50})}/>
+                    <input type="text" className="form-control" placeholder="Tasting notes (optional)" {...register("tastingNotes", { maxLength: 50 })} />
                 </fieldset>
 
                 <fieldset>
                     <label htmlFor="review"> Review your brew  </label>
-                    <textarea type="text" className="form-control" placeholder="Your review (optional)" {...register("review", {maxLength: 255})}/>
+                    <textarea type="text" className="form-control" placeholder="Your review (optional)" {...register("review", { maxLength: 255 })} />
                 </fieldset>
 
                 <fieldset>
                     <label htmlFor="rating"> Rating (1-5) </label>
-                    <input type="number" className="form-control"  {...register("rating", { min: 1, max:5 })} />
+                        {errors.rating && <p className="error-message">{errors.rating.message}</p>}
+                    <input type="number" className="form-control"  {...register("rating", { required: "Please rate your entry", min: 1, max: 5 })} />
                 </fieldset>
 
                 <fieldset>
                     <label htmlFor="setup"> Setup notes </label>
-                    <textarea type="text" className="form-control" placeholder="Ex: Rinse filter and dispose of water. " {...register("setup", {required: true, maxLength: 255})}/>
+                        {errors.setup && <p className="error-message">{errors.setup.message}</p>}
+                    <textarea type="text" className="form-control" placeholder="Ex: Rinse filter and dispose of water. " {...register("setup", { required: "Please add setup notes", maxLength: 255 })} />
                 </fieldset>
 
                 <fieldset>
                     <label htmlFor="private"> Privacy </label>
                     <select className="form-control"  {...register("private")} >
-                        <option value={false}>Public</option>
-                        <option value={true}>Private</option>
+                        <option value={0}>Public</option>
+                        <option value={1}>Private</option>
                     </select>
                 </fieldset>
 
