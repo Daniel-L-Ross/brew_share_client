@@ -20,7 +20,6 @@ export const EntryForm = () => {
         getBrewMethods()
     }, [])
 
-
     const [entry, setEntry] = useState({
         title: "",
         coffee: 0,
@@ -34,17 +33,17 @@ export const EntryForm = () => {
         rating: 0,
         setup: "",
         private: false,
-
     })
 
     const handleEntrySubmit = (newEntry) => {
         addEntry(newEntry)
-            .then(entry => history.push(`/entries/${entry.id}/detail`))
+            .then(entry => {
+                history.push(`/entries/${entry.id}/detail`)
+            })
     }
 
     return (
         <main style={{ textAlign: "center" }}>
-
 
             <form className="form--login" onSubmit={handleSubmit(handleEntrySubmit)}>
                 <h1 className="h3 mb-3 font-weight-normal">Add New Entry</h1>
