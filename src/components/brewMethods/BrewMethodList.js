@@ -12,14 +12,14 @@ export const BrewMethodList = () => {
     return (
         <>
             <h2>Brew Method List</h2>
-            <button onClick={()=> history.push("/brew-methods/add")}> Add New Coffee </button>
+            <button onClick={() => history.push("/brew-methods/add")}> Add Brew Method </button>
             {
                 brewMethods.map(method => {
                     return <div key={`brewMethod--${method.id}`}>
-                        <Link to={`/brew-method/${method.id}/detail`}>
-                            <h3>{method.name} {coffee.name}</h3>
-                        </Link>
-
+                        <h3>{method.name}</h3>
+                        <a href={method.website}>
+                            <img style={{ maxWidth: `15em` }} src={method.method_image}></img>
+                        </a>
                     </div>
                 })
             }

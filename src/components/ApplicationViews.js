@@ -8,6 +8,8 @@ import { EntryDetail } from "./entries/EntryDetail"
 import { EntryList } from "./entries/EntryList"
 import { EntryProvider } from "./entries/EntryProvider"
 import { NavBar } from "./nav/NavBar"
+import { BrewMethodProvider } from "./brewMethods/BrewMethodProvider"
+import { BrewMethodList } from "./brewMethods/BrewMethodList"
 
 
 export const ApplicationViews = () => {
@@ -38,6 +40,12 @@ export const ApplicationViews = () => {
             <CoffeeForm />
         </Route>
     </CoffeeProvider>
+
+    <BrewMethodProvider>
+        <Route exact path="/brew-methods">
+            <BrewMethodList />
+        </Route>
+    </BrewMethodProvider>
 
     </>
 }

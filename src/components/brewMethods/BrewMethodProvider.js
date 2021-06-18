@@ -6,7 +6,7 @@ export const BrewMethodContext = createContext()
 export const BrewMethodProvider = (props) => {
     const [brewMethods, setBrewMethods] = useState([])
 
-    const getBrewMethod = () => {
+    const getBrewMethods = () => {
         return fetch(`${authApi.localApiBaseUrl}/methods`, {
             headers: {
                 "Authorization": `Token ${apiAuthorizationRequest}`
@@ -39,7 +39,7 @@ export const BrewMethodProvider = (props) => {
 
     return (
         <BrewMethodContext.Provider value={{
-            brewMethods, getBrewMethod, getSingleBrewMethod, addBrewMethod
+            brewMethods, getBrewMethods, getSingleBrewMethod, addBrewMethod
         }}>
             {props.children}
             </BrewMethodContext.Provider>
