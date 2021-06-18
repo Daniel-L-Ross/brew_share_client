@@ -36,7 +36,7 @@ export const CoffeeForm = () => {
         newCoffee.coffeeImage = coffeeImage
         addCoffee(newCoffee)
         .then(setCoffee)
-        .then(() => history.push(`coffee/${coffee.id}/detail`))
+        .then(() => history.push(`/coffee/${coffee.id}/detail`))
     }
 
     return (
