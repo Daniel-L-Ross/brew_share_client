@@ -33,6 +33,9 @@ export const EntryForm = () => {
     // if an entryId is present, when the value of the entry is set, 
     // update the react-hook-form values
     useEffect(() => {
+        if (entry.edit_allowed === false){
+            history.push(`/entries/${entry.id}/detail`)
+        }
         setValue("title", entry.title)
         setValue("coffee", entry.coffee?.id)
         setValue("grindSize", entry.grind_size)
