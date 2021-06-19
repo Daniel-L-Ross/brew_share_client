@@ -18,7 +18,11 @@ export const NavBar = () => {
                 </Link>
             </li>
 
-            <li className="navbar__item">Add Entry</li>
+            <li className="navbar__item">
+                <Link to="/entries/create">
+                    Add Entry
+                </Link>
+            </li>
 
             <li className="navbar__item">My Entries</li>
 

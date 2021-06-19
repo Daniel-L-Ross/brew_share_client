@@ -11,47 +11,58 @@ import { NavBar } from "./nav/NavBar"
 import { BrewMethodProvider } from "./brewMethods/BrewMethodProvider"
 import { BrewMethodList } from "./brewMethods/BrewMethodList"
 import { BrewMethodForm } from "./brewMethods/BrewMethodForm"
+import { EntryForm } from "./entries/EntryForm"
 
 
 export const ApplicationViews = () => {
     return <>
 
-    <NavBar />
-    
-    <EntryProvider>
-        <Route exact path="/">
-            <EntryList />
-        </Route>
+        <NavBar />
 
-        <Route path="/entries/:entryId(\d+)">
-            <EntryDetail />
-        </Route>
-    </EntryProvider>
+        <EntryProvider>
+            <Route exact path="/">
+                <EntryList />
+            </Route>
 
-    <CoffeeProvider>
-        <Route exact path="/coffee">
-            <CoffeeList/>
-        </Route>
-        
-        <Route exact path="/coffee/:coffeeId(\d+)/detail">
-            <CoffeeDetail/>
-        </Route>
+            <Route path="/entries/:entryId(\d+)">
+                <EntryDetail />
+            </Route>
 
-        <Route exact path="/coffee/add">
-            <CoffeeForm />
-        </Route>
-    </CoffeeProvider>
+            <CoffeeProvider>
+                <BrewMethodProvider>
 
-    <BrewMethodProvider>
-        <Route exact path="/brew-methods">
-            <BrewMethodList />
-        </Route>
+                    <Route path="/entries/create">
+                        <EntryForm />
+                    </Route>
+                    
+                </BrewMethodProvider>
+            </CoffeeProvider>
+        </EntryProvider>
 
-        <Route path="/brew-methods/add">
-            <BrewMethodForm />
-        </Route>
+        <CoffeeProvider>
+            <Route exact path="/coffee">
+                <CoffeeList />
+            </Route>
 
-    </BrewMethodProvider>
+            <Route exact path="/coffee/:coffeeId(\d+)/detail">
+                <CoffeeDetail />
+            </Route>
+
+            <Route exact path="/coffee/add">
+                <CoffeeForm />
+            </Route>
+        </CoffeeProvider>
+
+        <BrewMethodProvider>
+            <Route exact path="/brew-methods">
+                <BrewMethodList />
+            </Route>
+
+            <Route path="/brew-methods/add">
+                <BrewMethodForm />
+            </Route>
+
+        </BrewMethodProvider>
 
     </>
 }
