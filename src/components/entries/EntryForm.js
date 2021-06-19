@@ -67,7 +67,7 @@ export const EntryForm = () => {
 
                     response.ok ?
                         history.push(`/entries/${entry.id}/detail`)
-                        : console.log(response)
+                        : alert("something went wrong...")
                 })
         }
     }
