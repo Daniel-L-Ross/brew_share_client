@@ -48,9 +48,29 @@ export const EntryProvider = (props) => {
         })
     }
 
+    const addFavoriteEntry = (entryId) => {
+        return fetch(`${authApi.localApiBaseUrl}/entries/${entryId}/favorite`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${apiAuthorizationRequest}`
+            }
+        })
+    }
+
+    const deleteFavoriteEntry = (entryId) => {
+        return fetch(`${authApi.localApiBaseUrl}/entries/${entryId}/favorite`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${apiAuthorizationRequest}`
+            }
+        })
+    }
+
     return (
         <EntryContext.Provider value={{
-            entries, getEntries, getSingleEntry, addEntry, updateEntry
+            entries, getEntries, getSingleEntry, addEntry, updateEntry, addFavoriteEntry, deleteFavoriteEntry
         }}>
             {props.children}
         </EntryContext.Provider>

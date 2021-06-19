@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom"
 import { EntryContext } from "./EntryProvider"
 
 export const EntryDetail = () => {
-    const { getSingleEntry } = useContext(EntryContext)
+    const { getSingleEntry, addFavoriteEntry, deleteFavoriteEntry } = useContext(EntryContext)
     const [entry, setEntry] = useState({})
     const { entryId } = useParams()
 
@@ -13,6 +13,20 @@ export const EntryDetail = () => {
             .then(setEntry)
     }, [])
 
+
+    const handleToggleFavorite = () => {
+        if (entry.favorite) {
+            deleteFavoriteEntry(entryId)
+            .then(() =>
+                getSingleEntry(entryId)
+                    .then(setEntry))
+        } else {
+            addFavoriteEntry(entryId)
+            .then(() =>
+                getSingleEntry(entryId)
+                    .then(setEntry))
+        }
+    }
 
     return (
         <>
@@ -30,7 +44,9 @@ export const EntryDetail = () => {
                         <p>Water: {entry.water_volume}g at {entry.water_temp} F</p>
                         <h3>Setup</h3>
                         <p>{entry.setup}</p>
-                        { JSON.parse(entry.edit_allowed) ?
+                        <button onClick={handleToggleFavorite}>{entry.favorite? "Unfavorite" : "Favorite"}</button>
+                        {entry.favorite &&<p>This is one of your favorites!</p>}
+                        {JSON.parse(entry.edit_allowed) ?
                             <Link to={`/entries/${entry.id}/edit`}>
                                 <button>Edit Entry</button>
                             </Link>
