@@ -36,10 +36,21 @@ export const EntryProvider = (props) => {
         })
             .then(res => res.json())
     }
+    
+    const updateEntry = (entryObject) => {
+        return fetch(`${authApi.localApiBaseUrl}/entries/${entryObject.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${apiAuthorizationRequest}`
+            },
+            body: JSON.stringify(entryObject)
+        })
+    }
 
     return (
         <EntryContext.Provider value={{
-            entries, getEntries, getSingleEntry, addEntry
+            entries, getEntries, getSingleEntry, addEntry, updateEntry
         }}>
             {props.children}
         </EntryContext.Provider>

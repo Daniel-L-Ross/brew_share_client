@@ -15,7 +15,7 @@ export const EntryList = () => {
             {
                 entries.map(entry => {
                     return <div key={`entry--${entry.id}`}>
-                        <Link to={`/entries/${entry.id}`}>
+                        <Link to={`/entries/${entry.id}/detail`}>
                         <h3>{entry.title} | {entry.brewer.user.first_name} {entry.brewer.user.last_name}</h3>
                         </Link>
 
