@@ -9,46 +9,77 @@ import "./Entry.css"
 
 export const EntryForm = () => {
     const history = useHistory()
-    const { addEntry } = useContext(EntryContext)
+    const { addEntry, getSingleEntry, updateEntry } = useContext(EntryContext)
     const { getCoffees, coffees } = useContext(CoffeeContext)
     const { getBrewMethods, brewMethods } = useContext(BrewMethodContext)
 
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm()
+
+    const { entryId } = useParams()
+    const [entry, setEntry] = useState({})
+
+    // boolean to determine if form is in edit or add state
+    const addMode = !entryId
 
     useEffect(() => {
         getCoffees()
         getBrewMethods()
+        if (!addMode) {
+            getSingleEntry(parseInt(entryId))
+                .then(setEntry)
+        }
     }, [])
 
-    const [entry, setEntry] = useState({
-        title: "",
-        coffee: 0,
-        grindSize: "",
-        coffeeAmount: 0,
-        method: 0,
-        waterTemp: 0,
-        waterVolume: 0,
-        tastingNotes: "",
-        review: "",
-        rating: 0,
-        setup: "",
-        private: false,
-    })
+    // if an entryId is present, when the value of the entry is set, 
+    // update the react-hook-form values
+    useEffect(() => {
+        if (entry.edit_allowed === false){
+            history.push(`/entries/${entry.id}/detail`)
+        }
+        setValue("title", entry.title)
+        setValue("coffee", entry.coffee?.id)
+        setValue("grindSize", entry.grind_size)
+        setValue("coffeeAmount", entry.coffee_amount)
+        setValue("method", entry.method?.id)
+        setValue("waterTemp", entry.water_temp)
+        setValue("waterVolume", entry.water_volume)
+        setValue("tastingNotes", entry.tasting_notes)
+        setValue("rating", entry.rating)
+        setValue("review", entry.review)
+        setValue("setup", entry.setup)
+        if (entry.private === "true") {
+            setValue("private", 1)
+        } else {
+            setValue("private", 0)
+        }
+    }, [entry])
 
-    const handleEntrySubmit = (newEntry) => {
-        addEntry(newEntry)
-            .then(newEntry => {
-                newEntry.id ?
-                    history.push(`/entries/${newEntry.id}/detail`)
-                    : alert("something went wrong...")
-            })
+
+    const handleEntrySubmit = (entryObject) => {
+        if (addMode) {
+            addEntry(entryObject)
+                .then(entryObject => {
+                    entryObject.id ?
+                        history.push(`/entries/${entryObject.id}/detail`)
+                        : alert("something went wrong...")
+                })
+        } else {
+            entryObject.id = entry.id
+            updateEntry(entryObject)
+                .then(response => {
+
+                    response.ok ?
+                        history.push(`/entries/${entry.id}/detail`)
+                        : alert("something went wrong...")
+                })
+        }
     }
 
     return (
         <main style={{ textAlign: "center" }}>
 
             <form className="form--login" onSubmit={handleSubmit(handleEntrySubmit)}>
-                <h1 className="h3 mb-3 font-weight-normal">Add New Entry</h1>
+                <h1 className="h3 mb-3 font-weight-normal">{addMode ? "Add New Entry" : "Edit Entry"}</h1>
                 <fieldset>
                     <label htmlFor="title"> Entry Title </label>
                     {errors.title && <p className="error-message">{errors.title.message}</p>}
@@ -73,7 +104,7 @@ export const EntryForm = () => {
                 <fieldset>
                     <label htmlFor="grindSize"> Grind Size </label>
                     {errors.grindSize && <p className="error-message">{errors.grindSize.message}</p>}
-                    <input type="text" className="form-control" placeholder="medium-fine"
+                    <input type="text" className="form-control" placeholder="grind size..."
                         {...register("grindSize", { required: "Please provide the grind size used", maxLength: 25 })} />
                 </fieldset>
 
@@ -150,7 +181,7 @@ export const EntryForm = () => {
                 <fieldset style={{
                     textAlign: "center"
                 }}>
-                    <button className="btn btn-1 btn-sep icon-send" type="submit">Save Entry</button>
+                    <button className="btn btn-1 btn-sep icon-send" type="submit">{addMode ? "Save Entry" : "Update Entry"}</button>
                 </fieldset>
             </form>
 

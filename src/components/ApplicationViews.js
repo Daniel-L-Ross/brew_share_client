@@ -24,7 +24,7 @@ export const ApplicationViews = () => {
                 <EntryList />
             </Route>
 
-            <Route path="/entries/:entryId(\d+)">
+            <Route exact path="/entries/:entryId(\d+)/detail">
                 <EntryDetail />
             </Route>
 
@@ -32,6 +32,10 @@ export const ApplicationViews = () => {
                 <BrewMethodProvider>
 
                     <Route path="/entries/create">
+                        <EntryForm />
+                    </Route>
+
+                    <Route path="/entries/:entryId(\d+)/edit">
                         <EntryForm />
                     </Route>
                     

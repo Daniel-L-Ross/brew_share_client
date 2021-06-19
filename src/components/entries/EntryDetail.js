@@ -30,6 +30,12 @@ export const EntryDetail = () => {
                         <p>Water: {entry.water_volume}g at {entry.water_temp} F</p>
                         <h3>Setup</h3>
                         <p>{entry.setup}</p>
+                        { JSON.parse(entry.edit_allowed) ?
+                            <Link to={`/entries/${entry.id}/edit`}>
+                                <button>Edit Entry</button>
+                            </Link>
+                            : <> </>
+                        }
                         {
                             (entry.steps.length > 1) ?
                                 <div>
