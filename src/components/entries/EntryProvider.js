@@ -47,10 +47,22 @@ export const EntryProvider = (props) => {
             body: JSON.stringify(entryObject)
         })
     }
+    
+    const deleteEntry = (entryId) => {
+        return fetch(`${authApi.localApiBaseUrl}/entries/${entryId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${apiAuthorizationRequest}`
+            }
+        })
+        .then(getEntries)
+    }
+    
 
     return (
         <EntryContext.Provider value={{
-            entries, getEntries, getSingleEntry, addEntry, updateEntry
+            entries, getEntries, getSingleEntry, addEntry, updateEntry, deleteEntry
         }}>
             {props.children}
         </EntryContext.Provider>
