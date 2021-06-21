@@ -70,9 +70,24 @@ export const EntryProvider = (props) => {
         })
     }
 
+    const searchEntries = (queryParams) => {
+        return fetch(`${apiSettings.baseUrl}/entries${queryParams}`, {
+            headers: apiHeaders()
+        })
+            .then(res => res.json())
+            .then(setEntries)
+    }
+
+    const togglePrivacy = (entryId) => {
+        return fetch(`${apiSettings.baseUrl}/entries/${entryId}/private`, {
+            method: "POST",
+            headers: apiHeaders()
+        })
+    }
+
     return (
         <EntryContext.Provider value={{
-            entries, getEntries, getSingleEntry, addEntry, updateEntry, addFavoriteEntry, deleteFavoriteEntry, deleteEntry, getFavoriteEntries
+            entries, getEntries, getSingleEntry, addEntry, updateEntry, addFavoriteEntry, deleteFavoriteEntry, deleteEntry, getFavoriteEntries, searchEntries, togglePrivacy
         }}>
             {props.children}
         </EntryContext.Provider>

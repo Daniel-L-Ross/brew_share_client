@@ -29,7 +29,11 @@ export const NavBar = () => {
                 </Link>
             </li>
 
-            <li className="navbar__item">My Entries</li>
+            <li className="navbar__item">
+                <Link to={`/${username()}/my-entries`}>
+                My Entries
+                </Link>
+                </li>
 
             <li className="navbar__item">
                 <Link to={`/${username()}/favorites`}>
