@@ -13,6 +13,15 @@ export const EntryProvider = (props) => {
             .then(res => res.json())
             .then(setEntries)
     }
+    const getFavoriteEntries = (username) => {
+        return fetch(`${apiSettings.baseUrl}/entries/favorites`, {
+            method: "POST",
+            headers: apiHeaders(),
+            body:JSON.stringify({"username": username})
+        })
+            .then(res => res.json())
+            .then(setEntries)
+    }
 
     const getSingleEntry = (entryId) => {
         return fetch(`${apiSettings.baseUrl}/entries/${entryId}`, {
@@ -47,9 +56,23 @@ export const EntryProvider = (props) => {
     }
     
 
+    const addFavoriteEntry = (entryId) => {
+        return fetch(`${apiSettings.baseUrl}/entries/${entryId}/favorite`, {
+            method: "POST",
+            headers: apiHeaders()
+        })
+    }
+
+    const deleteFavoriteEntry = (entryId) => {
+        return fetch(`${apiSettings.baseUrl}/entries/${entryId}/favorite`, {
+            method: "DELETE",
+            headers: apiHeaders()
+        })
+    }
+
     return (
         <EntryContext.Provider value={{
-            entries, getEntries, getSingleEntry, addEntry, updateEntry, deleteEntry
+            entries, getEntries, getSingleEntry, addEntry, updateEntry, addFavoriteEntry, deleteFavoriteEntry, deleteEntry, getFavoriteEntries
         }}>
             {props.children}
         </EntryContext.Provider>

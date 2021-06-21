@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, useHistory } from "react-router-dom"
+import { username } from "../auth/authSettings"
 import "./NavBar.css"
 
 const handleLogout = () => {
@@ -30,7 +31,11 @@ export const NavBar = () => {
 
             <li className="navbar__item">My Entries</li>
 
-            <li className="navbar__item">My Favorites</li>
+            <li className="navbar__item">
+                <Link to={`/${username}/favorites`}>
+                My Favorites
+                </Link>
+                </li>
 
             <li className="navbar__item">
                 <Link to="/coffee">
