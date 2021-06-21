@@ -3,6 +3,7 @@ import { EntryContext } from "./EntryProvider"
 import { useHistory, useParams } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import { EntrySteps } from "./EntrySteps"
+import { createImageString } from "../ImageUploadHandler"
 import "../auth/Auth.css"
 import "./Entry.css"
 
@@ -34,10 +35,10 @@ export const StepForm = () => {
             history.push(`/entries/${entry.id}/detail`)
         }
 
-        setValue("title", entry.title)
-        setValue("coffee", entry.coffee?.id)
-        setValue("descriptor", entry.descriptor)
-        setValue("coffeeAmount", entry.coffee_amount)
+        // setValue("title", entry.title)
+        // setValue("coffee", entry.coffee?.id)
+        // setValue("descriptor", entry.descriptor)
+        // setValue("coffeeAmount", entry.coffee_amount)
 
     }, [entry])
 
@@ -80,22 +81,22 @@ export const StepForm = () => {
                     <fieldset>
                         <label htmlFor="descriptor"> Descriptor </label>
                         {errors.descriptor && <p className="error-message">{errors.descriptor.message}</p>}
-                        <input type="text" className="form-control" placeholder="grind size..."
-                            {...register("descriptor", { required: "Please provide the grind size used", maxLength: 25 })} />
+                        <input type="text" className="form-control" placeholder="ex: STIR"
+                            {...register("descriptor", { required: "Please provide a single word descriptor of the action step", maxLength: 25 })} />
                     </fieldset>
 
                     <fieldset>
-                        <label htmlFor="coffeeAmount"> Instructions </label>
-                        {errors.coffeeAmount && <p className="error-message">{errors.coffeeAmount.message}</p>}
-                        <input type="number" className="form-control" placeholder="Enter a number..."
-                            {...register("coffeeAmount", { required: "Please add the amount of coffee used" })} />
+                        <label htmlFor="instruction"> Instruction </label>
+                        {errors.instruction && <p className="error-message">{errors.instruction.message}</p>}
+                        <input type="text" className="form-control" placeholder="the grounds 10 times gently"
+                            {...register("instruction", { required: "Enter a brief description of how to complete this step" })} />
                     </fieldset>
 
                     <fieldset>
-                        <label htmlFor="waterTemp"> Seconds </label>
-                        {errors.waterTemp && <p className="error-message">{errors.waterTemp.message}</p>}
-                        <input type="number" className="form-control" placeholder="Enter a number..."
-                            {...register("waterTemp", { required: "Please provide the water temp used", max: 212 })} />
+                        <label htmlFor="seconds"> Seconds </label>
+                        {errors.seconds && <p className="error-message">{errors.seconds.message}</p>}
+                        <input type="number" className="form-control" placeholder="Enter a the time (in seconds) when this step occurs"
+                            {...register("seconds", { required: "Please provide the water temp used"})} />
                     </fieldset>
 
                     
