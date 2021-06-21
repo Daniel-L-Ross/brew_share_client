@@ -8,7 +8,7 @@ export const Register = (props) => {
     const firstName = useRef()
     const lastName = useRef()
     const email = useRef()
-    const userName = useRef()
+    const username = useRef()
     const bio = useRef()
     const [imageString, setImageString] = useState('')
     const currentCoffee = useRef()
@@ -31,7 +31,7 @@ export const Register = (props) => {
                 "first_name": firstName.current.value,
                 "last_name": lastName.current.value,
                 "email": email.current.value,
-                "username": userName.current.value,
+                "username": username.current.value,
                 "bio": bio.current.value,
                 "currentCoffee": currentCoffee.current.value,
                 "currentBrewMethod": currentBrewMethod.current.value,
@@ -51,6 +51,7 @@ export const Register = (props) => {
                 .then(res => {
                     if ("valid" in res && res.valid) {
                         localStorage.setItem(userTokenStorageKey, res.token )
+                        localStorage.setItem("username", res.username)
                         localStorage.setItem("isAdmin", res.isAdmin)
                         history.push("/")
                     }
@@ -83,8 +84,8 @@ export const Register = (props) => {
                     <input ref={email} type="email" name="email" className="form-control" placeholder="Email address" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="userName"> Username </label>
-                    <input ref={userName} type="userName" name="userName" className="form-control" placeholder="Username" required />
+                    <label htmlFor="username"> Username </label>
+                    <input ref={username} type="username" name="username" className="form-control" placeholder="Username" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="bio"> Bio </label>
