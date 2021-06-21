@@ -3,13 +3,14 @@ import { EntryContext } from "./EntryProvider"
 import { Link, useParams } from "react-router-dom"
 
 export const EntryList = () => {
-    const { entries, getEntries } = useContext(EntryContext)
+    const { entries, getEntries, getFavoriteEntries } = useContext(EntryContext)
 
     const {username} = useParams()
     const listFavorites = username
 
     useEffect(() => {
         if (listFavorites) {
+            getFavoriteEntries(username)
             console.log(username)
         } else {
             getEntries()
@@ -17,7 +18,7 @@ export const EntryList = () => {
     }, [])
     return (
         <>
-            <h2>Entry List</h2>
+            <h2>{ username ? `${username}'s Favorites` : "Entry List"}</h2>
             {
                 entries.length && entries.map(entry => {
                     return <div key={`entry--${entry.id}`}>

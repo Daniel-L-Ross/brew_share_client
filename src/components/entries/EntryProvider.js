@@ -15,6 +15,7 @@ export const EntryProvider = (props) => {
     }
     const getFavoriteEntries = (username) => {
         return fetch(`${apiSettings.baseUrl}/entries/favorites`, {
+            method: "POST",
             headers: apiHeaders(),
             body:JSON.stringify({"username": username})
         })
@@ -71,7 +72,7 @@ export const EntryProvider = (props) => {
 
     return (
         <EntryContext.Provider value={{
-            entries, getEntries, getSingleEntry, addEntry, updateEntry, addFavoriteEntry, deleteFavoriteEntry, deleteEntry
+            entries, getEntries, getSingleEntry, addEntry, updateEntry, addFavoriteEntry, deleteFavoriteEntry, deleteEntry, getFavoriteEntries
         }}>
             {props.children}
         </EntryContext.Provider>
