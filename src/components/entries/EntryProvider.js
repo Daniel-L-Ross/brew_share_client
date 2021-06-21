@@ -13,6 +13,14 @@ export const EntryProvider = (props) => {
             .then(res => res.json())
             .then(setEntries)
     }
+    const getFavoriteEntries = (username) => {
+        return fetch(`${apiSettings.baseUrl}/entries/favorites`, {
+            headers: apiHeaders(),
+            body:JSON.stringify({"username": username})
+        })
+            .then(res => res.json())
+            .then(setEntries)
+    }
 
     const getSingleEntry = (entryId) => {
         return fetch(`${apiSettings.baseUrl}/entries/${entryId}`, {

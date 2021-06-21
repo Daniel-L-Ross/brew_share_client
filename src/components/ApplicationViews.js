@@ -23,6 +23,9 @@ export const ApplicationViews = () => {
             <Route exact path="/">
                 <EntryList />
             </Route>
+            <Route path="/:username/favorites">
+                <EntryList />
+            </Route>
 
             <Route exact path="/entries/:entryId(\d+)/detail">
                 <EntryDetail />
