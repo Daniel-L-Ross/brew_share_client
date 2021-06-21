@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react"
-import { authApi, apiAuthorizationRequest } from "../auth/authSettings"
+import { apiHeaders, apiSettings } from "../Settings"
 
 export const BrewMethodContext = createContext()
 
@@ -7,31 +7,24 @@ export const BrewMethodProvider = (props) => {
     const [brewMethods, setBrewMethods] = useState([])
 
     const getBrewMethods = () => {
-        return fetch(`${authApi.localApiBaseUrl}/methods`, {
-            headers: {
-                "Authorization": `Token ${apiAuthorizationRequest}`
-            }
+        return fetch(`${apiSettings.baseUrl}/methods`, {
+            headers: apiHeaders()
         })
             .then(res => res.json())
             .then(setBrewMethods)
     }
     
     const getSingleBrewMethod = (brewMethodId) => {
-        return fetch(`${authApi.localApiBaseUrl}/methods/${brewMethodId}`, {
-            headers: {
-                "Authorization": `Token ${apiAuthorizationRequest}`
-            }
+        return fetch(`${apiSettings.baseUrl}/methods/${brewMethodId}`, {
+            headers:  apiHeaders()
         })
             .then(res => res.json())
     }
 
     const addBrewMethod = (brewMethodObject) => {
-        return fetch(`${authApi.localApiBaseUrl}/methods`, {
+        return fetch(`${apiSettings.baseUrl}/methods`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Token ${apiAuthorizationRequest}`
-            },
+            headers:  apiHeaders(),
             body: JSON.stringify(brewMethodObject)
         })
             .then(res => res.json())

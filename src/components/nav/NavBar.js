@@ -2,6 +2,10 @@ import React from "react"
 import { Link, useHistory } from "react-router-dom"
 import "./NavBar.css"
 
+const handleLogout = () => {
+    localStorage.clear()
+}
+
 export const NavBar = () => {
 
     return (
@@ -39,6 +43,12 @@ export const NavBar = () => {
                     Brew Methods
                 </Link>
             </li>
+
+            <a href="/" onClick={handleLogout}>
+                <li className="navbar__item" >
+                    Logout
+                </li>
+            </a>
         </ul>
     )
 }
