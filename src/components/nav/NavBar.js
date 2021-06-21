@@ -32,7 +32,7 @@ export const NavBar = () => {
             <li className="navbar__item">My Entries</li>
 
             <li className="navbar__item">
-                <Link to={`/${username}/favorites`}>
+                <Link to={`/${username()}/favorites`}>
                 My Favorites
                 </Link>
                 </li>
