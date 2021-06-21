@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Link, useHistory, useParams } from "react-router-dom"
 import { EntryContext } from "./EntryProvider"
+import "./Entry.css"
 
 export const EntryDetail = () => {
     const { getSingleEntry, addFavoriteEntry, deleteFavoriteEntry, deleteEntry, togglePrivacy } = useContext(EntryContext)
@@ -51,9 +52,9 @@ export const EntryDetail = () => {
                         {JSON.parse(entry.edit_allowed) ?
                             <>
                                 <p>{entry.private ? "Private" : "Public"}</p>
-                                <label class="switch">
+                                <label className="switch">
                                     <input type="checkbox" checked={entry.private} onClick={handleTogglePrivacy}/>
-                                    <span class="slider round"></span>
+                                    <span className="slider round"></span>
                                 </label>
                             </>
                             : <></>
