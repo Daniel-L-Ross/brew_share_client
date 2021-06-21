@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react"
-import { authApi, apiAuthorizationRequest } from "../auth/authSettings"
+import { apiHeaders, apiSettings } from "../Settings"
 
 export const CoffeeContext = createContext()
 
@@ -7,31 +7,24 @@ export const CoffeeProvider = (props) => {
     const [coffees, setCoffees] = useState([])
 
     const getCoffees = () => {
-        return fetch(`${authApi.localApiBaseUrl}/coffees`, {
-            headers: {
-                "Authorization": `Token ${apiAuthorizationRequest}`
-            }
+        return fetch(`${apiSettings.baseUrl}/coffees`, {
+            headers: apiHeaders()
         })
             .then(res => res.json())
             .then(setCoffees)
     }
     
     const getSingleCoffee = (coffeeId) => {
-        return fetch(`${authApi.localApiBaseUrl}/coffees/${coffeeId}`, {
-            headers: {
-                "Authorization": `Token ${apiAuthorizationRequest}`
-            }
+        return fetch(`${apiSettings.baseUrl}/coffees/${coffeeId}`, {
+            headers:  apiHeaders()
         })
             .then(res => res.json())
     }
 
     const addCoffee = (coffeeObject) => {
-        return fetch(`${authApi.localApiBaseUrl}/coffees`, {
+        return fetch(`${apiSettings.baseUrl}/coffees`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Token ${apiAuthorizationRequest}`
-            },
+            headers:  apiHeaders(),
             body: JSON.stringify(coffeeObject)
         })
             .then(res => res.json())
