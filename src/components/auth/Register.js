@@ -8,6 +8,7 @@ export const Register = (props) => {
     const firstName = useRef()
     const lastName = useRef()
     const email = useRef()
+    const userName = useRef()
     const bio = useRef()
     const [imageString, setImageString] = useState('')
     const currentCoffee = useRef()
@@ -30,7 +31,7 @@ export const Register = (props) => {
                 "first_name": firstName.current.value,
                 "last_name": lastName.current.value,
                 "email": email.current.value,
-                "username": email.current.value,
+                "username": userName.current.value,
                 "bio": bio.current.value,
                 "currentCoffee": currentCoffee.current.value,
                 "currentBrewMethod": currentBrewMethod.current.value,
@@ -78,8 +79,12 @@ export const Register = (props) => {
                     <input ref={lastName} type="text" name="lastName" className="form-control" placeholder="Last name" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="inputEmail"> Email address </label>
+                    <label htmlFor="email"> Email address </label>
                     <input ref={email} type="email" name="email" className="form-control" placeholder="Email address" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="userName"> Username </label>
+                    <input ref={userName} type="userName" name="userName" className="form-control" placeholder="Username" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="bio"> Bio </label>
