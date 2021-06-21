@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { Link, useHistory, useParams } from "react-router-dom"
 import { EntryContext } from "./EntryProvider"
 import "./Entry.css"
+import { EntrySteps } from "./EntrySteps"
 
 export const EntryDetail = () => {
     const { getSingleEntry, addFavoriteEntry, deleteFavoriteEntry, deleteEntry, togglePrivacy } = useContext(EntryContext)
@@ -57,6 +58,10 @@ export const EntryDetail = () => {
                     <button >Edit Entry</button>
                 </Link>
 
+                <Link to={`/entries/${entry.id}/steps/add`}>
+                    <button >Add step</button>
+                </Link>
+
                 <button onClick={handleToggleFavorite}>{entry.favorite ? "Unfavorite" : "Favorite"}</button>
             </>
             : <button onClick={handleToggleFavorite}>{entry.favorite ? "Unfavorite" : "Favorite"}</button>
@@ -78,23 +83,7 @@ export const EntryDetail = () => {
                     <p>Water: {entry.water_volume}g at {entry.water_temp} F</p>
                     <h3>Setup</h3>
                     <p>{entry.setup}</p>
-                    {
-                        (entry.steps.length > 1) ?
-                            <div>
-                                <h2>STEPS</h2>
-                                <div>
-                                    {entry.steps.map(step => {
-                                        return <div key={`step--${step.id}`}>
-                                            <p>{step.seconds}</p>
-                                            <p>{step.descriptor}</p>
-                                            <p>{step.instruction}</p>
-                                            {/* TODO: add images of each step if present */}
-                                        </div>
-                                    })}
-                                </div>
-                            </div>
-                            : <></>
-                    }
+                    <EntrySteps steps={entry.steps} />
                     {buttonBar()}
                 </div>
             }
