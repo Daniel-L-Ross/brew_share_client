@@ -1,17 +1,29 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Link } from "react-router-dom"
+import { EntryContext } from "./EntryProvider"
 
+// deleteStep
 export const EntrySteps = ({ entry }) => {
+    const { deleteStep, getSingleEntry } = useContext(EntryContext)
 
     const steps = entry.steps
+
+    const handleDelete = (event) => {
+        if (window.confirm("Do you want to delete this step? This cannot be undone")) {
+            deleteStep(event.target.id, entry.id)
+            .then(getSingleEntry(entry.id))
+        }
+    }
+
     {/* TODO: add images of each step if present */ }
 
-    const actionButtons = (stepId) => {
+    const actionButtons = (step) => {
         return (entry.edit_allowed) ?
             <>
-                <Link to={`/entries/${entry.id}/steps/${stepId}/edit`}>
+                <Link to={`/entries/${entry.id}/steps/${step.id}/edit`}>
                     <button>Edit</button>
                 </Link>
+                    <button id={step.id} onClick={handleDelete}>Delete</button>
             </>
             : <> </>
     }
@@ -28,7 +40,7 @@ export const EntrySteps = ({ entry }) => {
                                     <p>{step.seconds}</p>
                                     <p>{step.descriptor}</p>
                                     <p>{step.instruction}</p>
-                                    {actionButtons(step.id)}
+                                    {actionButtons(step)}
                                 </div>
                             })}
                         </div>

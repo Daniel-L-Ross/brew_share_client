@@ -25,16 +25,16 @@ export const StepForm = () => {
 
     useEffect(() => {
         getSingleEntry(parseInt(entryId))
-            .then( entry => {
-                setEntry(entry)
-                if (stepId){
-                    const step = entry.steps.find(step => step.id === parseInt(stepId))
+            // .then(entry => {
+            //     setEntry(entry)
+            //     if (stepId) {
+            //         const step = entry.steps.find(step => step.id === parseInt(stepId))
 
-                    setStep(step)
-                }
-            }
-                
-                )
+            //         setStep(step)
+            //     }
+            // }
+
+            // )
     }, [])
 
     // if an entryId is present, when the value of the entry is set, 
@@ -58,7 +58,7 @@ export const StepForm = () => {
         stepObject.entryId = entryId
         if (addMode) {
             addStep(stepObject)
-            .then(()=> history.push(`entries/${entryId}/detail`))
+                .then(() => history.push(`entries/${entryId}/detail`))
         } else {
             stepObject.id = stepId
             updateStep(stepObject)

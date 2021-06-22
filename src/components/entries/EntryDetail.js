@@ -5,15 +5,14 @@ import "./Entry.css"
 import { EntrySteps } from "./EntrySteps"
 
 export const EntryDetail = () => {
-    const { getSingleEntry, addFavoriteEntry, deleteFavoriteEntry, deleteEntry, togglePrivacy } = useContext(EntryContext)
-    const [entry, setEntry] = useState({})
+    const { entry, getSingleEntry, addFavoriteEntry, deleteFavoriteEntry, deleteEntry, togglePrivacy } = useContext(EntryContext)
+    // const [entry, setEntry] = useState({})
     const { entryId } = useParams()
 
     const history = useHistory()
 
     useEffect(() => {
         getSingleEntry(entryId)
-            .then(setEntry)
     }, [])
 
     const handleDelete = () => {
@@ -27,20 +26,17 @@ export const EntryDetail = () => {
         if (entry.favorite) {
             deleteFavoriteEntry(entryId)
                 .then(() =>
-                    getSingleEntry(entryId)
-                        .then(setEntry))
+                    getSingleEntry(entryId))
         } else {
             addFavoriteEntry(entryId)
                 .then(() =>
-                    getSingleEntry(entryId)
-                        .then(setEntry))
+                    getSingleEntry(entryId))
         }
     }
 
     const handleTogglePrivacy = () => {
         togglePrivacy(entryId)
             .then(() => getSingleEntry(entryId))
-            .then(setEntry)
     }
 
     const buttonBar = () => {
