@@ -14,6 +14,7 @@ export const EntryProvider = (props) => {
             .then(res => res.json())
             .then(setEntries)
     }
+    
     const getFavoriteEntries = (username) => {
         return fetch(`${apiSettings.baseUrl}/entries/favorites`, {
             method: "POST",
