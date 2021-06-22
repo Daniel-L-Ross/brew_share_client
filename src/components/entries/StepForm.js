@@ -9,14 +9,13 @@ import "./Entry.css"
 
 export const StepForm = () => {
     const history = useHistory()
-    const { getSingleEntry, addStep, updateStep } = useContext(EntryContext)
+    const { getSingleEntry, addStep, updateStep, entry } = useContext(EntryContext)
 
     const { register, handleSubmit, formState: { errors }, setValue } = useForm()
 
     const { entryId } = useParams()
     const { stepId } = useParams()
 
-    const [entry, setEntry] = useState({})
     const [step, setStep] = useState({})
     const [imageString, setImageString] = useState('')
 
@@ -25,17 +24,14 @@ export const StepForm = () => {
 
     useEffect(() => {
         getSingleEntry(parseInt(entryId))
-            // .then(entry => {
-            //     setEntry(entry)
-            //     if (stepId) {
-            //         const step = entry.steps.find(step => step.id === parseInt(stepId))
-
-            //         setStep(step)
-            //     }
-            // }
-
-            // )
     }, [])
+
+    useEffect(() => {
+        if (stepId) {
+            const step = entry.steps.find(step => step.id === parseInt(stepId))
+            setStep(step)
+        }
+    }, [entry])
 
     // if an entryId is present, when the value of the entry is set, 
     // update the react-hook-form values
@@ -58,7 +54,7 @@ export const StepForm = () => {
         stepObject.entryId = entryId
         if (addMode) {
             addStep(stepObject)
-                .then(() => history.push(`entries/${entryId}/detail`))
+                .then(() => history.push(`/entries/${entryId}/detail`))
         } else {
             stepObject.id = stepId
             updateStep(stepObject)

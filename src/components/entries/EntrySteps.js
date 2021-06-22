@@ -31,7 +31,7 @@ export const EntrySteps = ({ entry }) => {
     return (
         <>
             {
-                (steps?.length > 1) ?
+                (steps?.length >= 1) ?
                     <>
                         <h2>STEPS</h2>
                         <div>
