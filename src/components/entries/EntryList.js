@@ -5,52 +5,24 @@ import { SearchBar } from "./SearchBar"
 
 
 export const EntryList = () => {
-    const { entries, getEntries, getFavoriteEntries, searchEntries } = useContext(EntryContext)
-    
-    const location = useLocation()
+    const { entries, baseSearchUrl } = useContext(EntryContext)
 
-    const {username} = useParams()
-    const listFavorites = () => {
-        if (username &&  location.pathname.includes("favorites")) {
-            return true
-        } else {
-            return false
-        }
-    }
-    const listUserEntries = () => {
-        if (username &&  location.pathname.includes("my-entries")) {
-            return true
-        } else {
-            return false
-        }
-    }
+    const location = useLocation()
+    const { username } = useParams()
 
     const pageTitle = () => {
-        if (username &&  location.pathname.includes("favorites")) {
+        if (username && location.pathname.includes("favorites")) {
             return `${username}'s Favorites`
-        } else if (username &&  location.pathname.includes("my-entries")){
+        } else if (username && location.pathname.includes("my-entries")) {
             return "Your Entries"
         } else {
             return "Entries"
         }
     }
 
-    useEffect(() => {
-        if (listFavorites()) {
-            getFavoriteEntries(username)
-        } else if (listUserEntries()) {
-            searchEntries(`?username=${username}`)
-        } else {
-            getEntries()
-        }
-        
-    }, [])
-
-    
-
     return (
         <>
-            <h2>{ pageTitle() }</h2>
+            <h2>{pageTitle()}</h2>
             <SearchBar />
             {
                 entries.length && entries.map(entry => {

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
+import { Link, useParams, useLocation } from "react-router-dom"
 import { CoffeeContext } from "../coffee/CoffeeProvider"
 import { BrewMethodContext } from "../brewMethods/BrewMethodProvider"
 import { EntryContext } from "./EntryProvider"
@@ -6,7 +7,7 @@ import { EntryContext } from "./EntryProvider"
 export const SearchBar = () => {
     const { getCoffees, coffees } = useContext(CoffeeContext)
     const { getBrewMethods, brewMethods } = useContext(BrewMethodContext)
-    const { searchEntries } = useContext(EntryContext)
+    const { getEntries } = useContext(EntryContext)
 
     const [searchTerm, setSearchTerm] = useState("")
     const [filters, setFilters] = useState({
@@ -14,14 +15,29 @@ export const SearchBar = () => {
         method: 0
     })
 
+    // determine the base url
+    const location = useLocation()
+    const { username } = useParams()
+
+    const baseSearchUrl = () => {
+        if (username && location.pathname.includes("favorites")) {
+            return "?favorite=True"
+        } else if (username && location.pathname.includes("my-entries")) {
+            return `?username=${username}`
+        } else {
+            return ""
+        }
+    }
+
+    // get data for rendering search options and for current entries to be displayed
     useEffect(() => {
         getCoffees()
         getBrewMethods()
-
+        getEntries(baseSearchUrl())
     }, [])
 
     const updateSearch = () => {
-        let queryParams = "?"
+        let queryParams = ""
         if (searchTerm.length) {
             queryParams += `${searchTerm}`
         }
@@ -36,11 +52,11 @@ export const SearchBar = () => {
             coffee: 0,
             method: 0
         })
-        
+        getEntries(baseSearchUrl())
     }
 
-    const handleInputChange = ( event ) => {
-        if(event.target.id === "searchTerm"){
+    const handleInputChange = (event) => {
+        if (event.target.id === "searchTerm") {
             const newTerm = event.target.value
             setSearchTerm(newTerm)
         } else {
@@ -53,9 +69,9 @@ export const SearchBar = () => {
     return (
         <>
             <p>SEARCH: </p>
-            <input className="" type="text" id="searchTerm" placeholder="Search posts..." value={searchTerm} onChange={handleInputChange}/>
+            <input className="" type="text" id="searchTerm" placeholder="Search posts..." value={searchTerm} onChange={handleInputChange} />
             <label htmlFor="coffee"> Coffee </label>
-            <select className="" id="coffee" value={ filters.coffee } onChange={handleInputChange}>
+            <select className="" id="coffee" value={filters.coffee} onChange={handleInputChange}>
                 <option value="">Filter by Coffee</option>
                 {
                     coffees.map(coffee => {
@@ -64,7 +80,7 @@ export const SearchBar = () => {
                 }
             </select>
             <label htmlFor="method"> Brew Method </label>
-            <select className="" id="method" value={ filters.method } onChange={handleInputChange}>
+            <select className="" id="method" value={filters.method} onChange={handleInputChange}>
                 <option value="">Filter by Brewing Method</option>
                 {
                     brewMethods.map(method => {

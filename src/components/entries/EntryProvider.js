@@ -7,14 +7,14 @@ export const EntryProvider = (props) => {
     const [entries, setEntries] = useState([])
     const [entry, setEntry] = useState({})
 
-    const getEntries = () => {
-        return fetch(`${apiSettings.baseUrl}/entries`, {
+    const getEntries = (queryParams) => {
+        return fetch(`${apiSettings.baseUrl}/entries${queryParams}`, {
             headers: apiHeaders()
         })
             .then(res => res.json())
             .then(setEntries)
     }
-    
+
     const getFavoriteEntries = (username) => {
         return fetch(`${apiSettings.baseUrl}/entries/favorites`, {
             method: "POST",
@@ -73,14 +73,6 @@ export const EntryProvider = (props) => {
         })
     }
 
-    const searchEntries = (queryParams) => {
-        return fetch(`${apiSettings.baseUrl}/entries${queryParams}`, {
-            headers: apiHeaders()
-        })
-            .then(res => res.json())
-            .then(setEntries)
-    }
-
     const togglePrivacy = (entryId) => {
         return fetch(`${apiSettings.baseUrl}/entries/${entryId}/private`, {
             method: "POST",
@@ -115,7 +107,7 @@ export const EntryProvider = (props) => {
     return (
         <EntryContext.Provider value={{
             entries, entry, getEntries, getSingleEntry, addEntry, updateEntry, addFavoriteEntry, deleteFavoriteEntry, 
-            deleteEntry, getFavoriteEntries, searchEntries, togglePrivacy, addStep, updateStep, deleteStep
+            deleteEntry, getFavoriteEntries, togglePrivacy, addStep, updateStep, deleteStep,
         }}>
             {props.children}
         </EntryContext.Provider>
