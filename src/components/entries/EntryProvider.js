@@ -85,9 +85,18 @@ export const EntryProvider = (props) => {
         })
     }
 
+    const addStep = (stepObject) => {
+        return fetch(`${apiSettings.baseUrl}/entries/${stepObject.entryId}/steps`, {
+            method: "POST",
+            headers:  apiHeaders(),
+            body: JSON.stringify(stepObject)
+        })
+    }
+
     return (
         <EntryContext.Provider value={{
-            entries, getEntries, getSingleEntry, addEntry, updateEntry, addFavoriteEntry, deleteFavoriteEntry, deleteEntry, getFavoriteEntries, searchEntries, togglePrivacy
+            entries, getEntries, getSingleEntry, addEntry, updateEntry, addFavoriteEntry, deleteFavoriteEntry, 
+            deleteEntry, getFavoriteEntries, searchEntries, togglePrivacy, addStep
         }}>
             {props.children}
         </EntryContext.Provider>

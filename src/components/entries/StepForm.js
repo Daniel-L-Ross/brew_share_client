@@ -9,7 +9,7 @@ import "./Entry.css"
 
 export const StepForm = () => {
     const history = useHistory()
-    const { getSingleEntry } = useContext(EntryContext)
+    const { getSingleEntry, addStep } = useContext(EntryContext)
 
     const { register, handleSubmit, formState: { errors }, setValue } = useForm()
 
@@ -35,22 +35,21 @@ export const StepForm = () => {
             history.push(`/entries/${entry.id}/detail`)
         }
 
-        // setValue("title", entry.title)
-        // setValue("coffee", entry.coffee?.id)
-        // setValue("descriptor", entry.descriptor)
-        // setValue("coffeeAmount", entry.coffee_amount)
+        setValue("descriptor", entry.descriptor)
+        setValue("instruction", entry.instruction)
+        setValue("seconds", entry.seconds)
 
     }, [entry])
 
+    const updateImageString = (event) => {
+        createImageString(event.target.files[0], setImageString)
+    }
 
     const handleStepSubmit = (stepObject) => {
         if (addMode) {
-            // addEntry(entryObject)
-            //     .then(entryObject => {
-            //         entryObject.id ?
-            //             history.push(`/entries/${entryObject.id}/detail`)
-            //             : alert("something went wrong...")
-            //     })
+            stepObject.entryId = entryId
+            addStep(stepObject)
+            .then(()=> history.push(`entries/${entryId}/detail`))
         } else {
             // entryObject.id = entry.id
             // updateEntry(entryObject)
@@ -72,9 +71,8 @@ export const StepForm = () => {
                 <form className="form--login" onSubmit={handleSubmit(handleStepSubmit)}>
                     <h1 className="h3 mb-3 font-weight-normal">{addMode ? "Add New Step" : "Edit Step"}</h1>
                     <fieldset>
-                        <label htmlFor="stepImage"> Step image (optional)</label>
-                        <input type="file" className="form-control"
-                            {...register("stepImage")} />
+                        <label htmlFor="stepImage"> Step Image (optional) </label>
+                        <input type="file" name="stepImage" className="form-control" onChange={updateImageString} />
                     </fieldset>
 
 
@@ -96,10 +94,10 @@ export const StepForm = () => {
                         <label htmlFor="seconds"> Seconds </label>
                         {errors.seconds && <p className="error-message">{errors.seconds.message}</p>}
                         <input type="number" className="form-control" placeholder="Enter a the time (in seconds) when this step occurs"
-                            {...register("seconds", { required: "Please provide the water temp used"})} />
+                            {...register("seconds", { required: "Please provide the water temp used" })} />
                     </fieldset>
 
-                    
+
 
                     <fieldset style={{
                         textAlign: "center"
