@@ -5,6 +5,7 @@ export const EntryContext = createContext()
 
 export const EntryProvider = (props) => {
     const [entries, setEntries] = useState([])
+    const [entry, setEntry] = useState({})
 
     const getEntries = () => {
         return fetch(`${apiSettings.baseUrl}/entries`, {
@@ -28,6 +29,7 @@ export const EntryProvider = (props) => {
             headers: apiHeaders()
         })
             .then(res => res.json())
+            .then(setEntry)
     }
 
     const addEntry = (entryObject) => {
@@ -85,9 +87,34 @@ export const EntryProvider = (props) => {
         })
     }
 
+    const addStep = (stepObject) => {
+        return fetch(`${apiSettings.baseUrl}/entries/${stepObject.entryId}/steps`, {
+            method: "POST",
+            headers:  apiHeaders(),
+            body: JSON.stringify(stepObject)
+        })
+    }
+
+    const updateStep = (stepObject) => {
+        return fetch(`${apiSettings.baseUrl}/entries/${stepObject.entryId}/steps`, {
+            method: "PUT",
+            headers:  apiHeaders(),
+            body: JSON.stringify(stepObject)
+        })
+    }
+
+    const deleteStep = (stepId, entryId) => {
+        return fetch(`${apiSettings.baseUrl}/entries/${entryId}/steps`, {
+            method: "DELETE",
+            headers:  apiHeaders(),
+            body: JSON.stringify({"id": stepId})
+        })
+    }
+
     return (
         <EntryContext.Provider value={{
-            entries, getEntries, getSingleEntry, addEntry, updateEntry, addFavoriteEntry, deleteFavoriteEntry, deleteEntry, getFavoriteEntries, searchEntries, togglePrivacy
+            entries, entry, getEntries, getSingleEntry, addEntry, updateEntry, addFavoriteEntry, deleteFavoriteEntry, 
+            deleteEntry, getFavoriteEntries, searchEntries, togglePrivacy, addStep, updateStep, deleteStep
         }}>
             {props.children}
         </EntryContext.Provider>

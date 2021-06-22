@@ -12,6 +12,7 @@ import { BrewMethodProvider } from "./brewMethods/BrewMethodProvider"
 import { BrewMethodList } from "./brewMethods/BrewMethodList"
 import { BrewMethodForm } from "./brewMethods/BrewMethodForm"
 import { EntryForm } from "./entries/EntryForm"
+import { StepForm } from "./entries/StepForm"
 
 
 export const ApplicationViews = () => {
@@ -32,6 +33,14 @@ export const ApplicationViews = () => {
 
             <Route exact path="/entries/:entryId(\d+)/detail">
                 <EntryDetail />
+            </Route>
+
+            <Route exact path="/entries/:entryId(\d+)/steps/add">
+                <StepForm />
+            </Route>
+
+            <Route path="/entries/:entryId(\d+)/steps/:stepId(\d+)/edit">
+                <StepForm />
             </Route>
 
             <CoffeeProvider>
