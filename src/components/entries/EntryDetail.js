@@ -44,7 +44,7 @@ export const EntryDetail = () => {
     }
 
     const buttonBar = () => {
-        return JSON.parse(entry.edit_allowed) ?
+        return (entry.edit_allowed) ?
             <>
                 <p>{entry.private ? "Private" : "Public"}</p>
                 <label className="switch">
@@ -83,7 +83,7 @@ export const EntryDetail = () => {
                     <p>Water: {entry.water_volume}g at {entry.water_temp} F</p>
                     <h3>Setup</h3>
                     <p>{entry.setup}</p>
-                    <EntrySteps steps={entry.steps} />
+                    <EntrySteps entry={entry} />
                     {buttonBar()}
                 </div>
             }

@@ -1,9 +1,21 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
-export const EntrySteps = ({ steps }) => {
+export const EntrySteps = ({ entry }) => {
 
+    const steps = entry.steps
     {/* TODO: add images of each step if present */ }
-    
+
+    const actionButtons = (stepId) => {
+        return (entry.edit_allowed) ?
+            <>
+                <Link to={`/entries/${entry.id}/steps/${stepId}/edit`}>
+                    <button>Edit</button>
+                </Link>
+            </>
+            : <> </>
+    }
+
     return (
         <>
             {
@@ -16,6 +28,7 @@ export const EntrySteps = ({ steps }) => {
                                     <p>{step.seconds}</p>
                                     <p>{step.descriptor}</p>
                                     <p>{step.instruction}</p>
+                                    {actionButtons(step.id)}
                                 </div>
                             })}
                         </div>

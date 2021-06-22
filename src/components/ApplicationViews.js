@@ -35,7 +35,11 @@ export const ApplicationViews = () => {
                 <EntryDetail />
             </Route>
 
-            <Route path="/entries/:entryId(\d+)/steps/add">
+            <Route exact path="/entries/:entryId(\d+)/steps/add">
+                <StepForm />
+            </Route>
+
+            <Route path="/entries/:entryId(\d+)/steps/:stepId(\d+)/edit">
                 <StepForm />
             </Route>
 

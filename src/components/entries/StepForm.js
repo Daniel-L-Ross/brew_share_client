@@ -9,7 +9,7 @@ import "./Entry.css"
 
 export const StepForm = () => {
     const history = useHistory()
-    const { getSingleEntry, addStep } = useContext(EntryContext)
+    const { getSingleEntry, addStep, updateStep } = useContext(EntryContext)
 
     const { register, handleSubmit, formState: { errors }, setValue } = useForm()
 
@@ -25,7 +25,16 @@ export const StepForm = () => {
 
     useEffect(() => {
         getSingleEntry(parseInt(entryId))
-            .then(setEntry)
+            .then( entry => {
+                setEntry(entry)
+                if (stepId){
+                    const step = entry.steps.find(step => step.id === parseInt(stepId))
+
+                    setStep(step)
+                }
+            }
+                
+                )
     }, [])
 
     // if an entryId is present, when the value of the entry is set, 
@@ -33,38 +42,37 @@ export const StepForm = () => {
     useEffect(() => {
         if (entry.edit_allowed === false) {
             history.push(`/entries/${entry.id}/detail`)
+        } else {
+            setValue("descriptor", step.descriptor)
+            setValue("instruction", step.instruction)
+            setValue("seconds", step.seconds)
         }
 
-        setValue("descriptor", entry.descriptor)
-        setValue("instruction", entry.instruction)
-        setValue("seconds", entry.seconds)
-
-    }, [entry])
+    }, [step])
 
     const updateImageString = (event) => {
         createImageString(event.target.files[0], setImageString)
     }
 
     const handleStepSubmit = (stepObject) => {
+        stepObject.entryId = entryId
         if (addMode) {
-            stepObject.entryId = entryId
             addStep(stepObject)
             .then(()=> history.push(`entries/${entryId}/detail`))
         } else {
-            // entryObject.id = entry.id
-            // updateEntry(entryObject)
-            //     .then(response => {
-
-            //         response.ok ?
-            //             history.push(`/entries/${entry.id}/detail`)
-            //             : alert("something went wrong...")
-            //     })
+            stepObject.id = stepId
+            updateStep(stepObject)
+                .then(response => {
+                    response.ok ?
+                        history.push(`/entries/${entryId}/detail`)
+                        : alert("something went wrong...")
+                })
         }
     }
 
     return (
         <>
-            <EntrySteps steps={entry.steps} />
+            <EntrySteps entry={entry} />
 
             <main style={{ textAlign: "center" }}>
 
