@@ -5,7 +5,7 @@ import { SearchBar } from "./SearchBar"
 
 
 export const EntryList = () => {
-    const { entries, baseSearchUrl } = useContext(EntryContext)
+    const { entries } = useContext(EntryContext)
 
     const location = useLocation()
     const { username } = useParams()

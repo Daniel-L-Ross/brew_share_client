@@ -15,8 +15,6 @@ export const EntrySteps = ({ entry }) => {
         }
     }
 
-    {/* TODO: add images of each step if present */ }
-
     const actionButtons = (step) => {
         return (entry.edit_allowed) ?
             <>
@@ -37,10 +35,13 @@ export const EntrySteps = ({ entry }) => {
                         <div>
                             {steps.map(step => {
                                 return <div key={`step--${step.id}`}>
+                                    <div>
                                     <p>{step.seconds}</p>
                                     <p>{step.descriptor}</p>
                                     <p>{step.instruction}</p>
                                     {actionButtons(step)}
+                                    </div>
+                                    <img style={{ maxWidth: `15em` }} src={step.step_image}></img>
                                 </div>
                             })}
                         </div>

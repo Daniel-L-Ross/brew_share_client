@@ -10,15 +10,17 @@ export const SearchBar = () => {
     const { getEntries } = useContext(EntryContext)
 
     const [searchTerm, setSearchTerm] = useState("")
+
+    // manage state variable of current search filters
     const [filters, setFilters] = useState({
         coffee: 0,
         method: 0
     })
 
-    // determine the base url
     const location = useLocation()
     const { username } = useParams()
-
+    
+    // determine the base url based on the route and params
     const baseSearchUrl = () => {
         if (username && location.pathname.includes("favorites")) {
             return "?favorite=True"
@@ -36,6 +38,7 @@ export const SearchBar = () => {
         getEntries(baseSearchUrl())
     }, [])
 
+    // build custom query params string to append to fetch call
     const updateSearch = () => {
         let queryParams = ""
         const oneParamExists = (queryParams.includes("?") || baseSearchUrl().includes("?"))
@@ -54,8 +57,6 @@ export const SearchBar = () => {
         const searchUrl = baseSearchUrl() + queryParams
         getEntries(searchUrl)
     }
-
-    //TODO: handle base url here
 
     const clearSearch = () => {
         setSearchTerm("")
