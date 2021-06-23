@@ -44,7 +44,7 @@ export const EntryDetail = () => {
             <>
                 <p>{entry.private ? "Private" : "Public"}</p>
                 <label className="switch">
-                    <input type="checkbox" checked={entry.private} onClick={handleTogglePrivacy} />
+                    <input type="checkbox" checked={entry.private} onChange={handleTogglePrivacy} />
                     <span className="slider round"></span>
                 </label>
 
