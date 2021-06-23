@@ -30,7 +30,6 @@ export const Login = () => {
                 if ("valid" in res && res.valid) {
                     localStorage.setItem(userTokenStorageKey, res.token )
                     localStorage.setItem("username", res.username)
-                    localStorage.setItem("isAdmin", res.isAdmin)
                     history.push("/")
                 }
                 else {

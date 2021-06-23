@@ -37,6 +37,7 @@ Instructions for setting up a the local server for this app cna be found here: [
 Fill out a support ticket if you discover any major bugs to address. 
 
 ## Roadmap
+In its current state, the app is functional but does not have a mobile-first design. My next feature w
 Planned features include:
 ### Recipes & Recommend 
 ![recommend](./ReadmeImages/recommend.png)
