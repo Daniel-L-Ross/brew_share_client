@@ -9,14 +9,13 @@ import "./Entry.css"
 
 export const EntryForm = () => {
     const history = useHistory()
-    const { addEntry, getSingleEntry, updateEntry } = useContext(EntryContext)
+    const { addEntry, getSingleEntry, updateEntry, entry } = useContext(EntryContext)
     const { getCoffees, coffees } = useContext(CoffeeContext)
     const { getBrewMethods, brewMethods } = useContext(BrewMethodContext)
 
     const { register, handleSubmit, formState: { errors }, setValue } = useForm()
 
     const { entryId } = useParams()
-    const [entry, setEntry] = useState({})
 
     // boolean to determine if form is in edit or add state
     const addMode = !entryId
@@ -26,7 +25,6 @@ export const EntryForm = () => {
         getBrewMethods()
         if (!addMode) {
             getSingleEntry(parseInt(entryId))
-                .then(setEntry)
         }
     }, [])
 
