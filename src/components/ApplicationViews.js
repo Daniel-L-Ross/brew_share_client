@@ -21,30 +21,31 @@ export const ApplicationViews = () => {
         <NavBar />
 
         <EntryProvider>
-            <Route exact path="/">
-                <EntryList />
-            </Route>
-            <Route path="/:username/favorites">
-                <EntryList />
-            </Route>
-            <Route path="/:username/my-entries">
-                <EntryList />
-            </Route>
-
-            <Route exact path="/entries/:entryId(\d+)/detail">
-                <EntryDetail />
-            </Route>
-
-            <Route exact path="/entries/:entryId(\d+)/steps/add">
-                <StepForm />
-            </Route>
-
-            <Route path="/entries/:entryId(\d+)/steps/:stepId(\d+)/edit">
-                <StepForm />
-            </Route>
-
             <CoffeeProvider>
                 <BrewMethodProvider>
+                
+                    <Route exact path="/">
+                        <EntryList />
+                    </Route>
+                    <Route path="/:username/favorites">
+                        <EntryList />
+                    </Route>
+                    <Route path="/:username/my-entries">
+                        <EntryList />
+                    </Route>
+
+                    <Route exact path="/entries/:entryId(\d+)/detail">
+                        <EntryDetail />
+                    </Route>
+
+                    <Route exact path="/entries/:entryId(\d+)/steps/add">
+                        <StepForm />
+                    </Route>
+
+                    <Route path="/entries/:entryId(\d+)/steps/:stepId(\d+)/edit">
+                        <StepForm />
+                    </Route>
+
 
                     <Route path="/entries/create">
                         <EntryForm />
@@ -53,7 +54,7 @@ export const ApplicationViews = () => {
                     <Route path="/entries/:entryId(\d+)/edit">
                         <EntryForm />
                     </Route>
-                    
+
                 </BrewMethodProvider>
             </CoffeeProvider>
         </EntryProvider>

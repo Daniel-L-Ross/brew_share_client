@@ -6,7 +6,6 @@ import { EntrySteps } from "./EntrySteps"
 
 export const EntryDetail = () => {
     const { entry, getSingleEntry, addFavoriteEntry, deleteFavoriteEntry, deleteEntry, togglePrivacy } = useContext(EntryContext)
-    // const [entry, setEntry] = useState({})
     const { entryId } = useParams()
 
     const history = useHistory()
@@ -44,7 +43,7 @@ export const EntryDetail = () => {
             <>
                 <p>{entry.private ? "Private" : "Public"}</p>
                 <label className="switch">
-                    <input type="checkbox" checked={entry.private} onClick={handleTogglePrivacy} />
+                    <input type="checkbox" checked={entry.private} onChange={handleTogglePrivacy} />
                     <span className="slider round"></span>
                 </label>
 
