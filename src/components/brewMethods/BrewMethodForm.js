@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useState } from "react"
 import { BrewMethodContext } from "./BrewMethodProvider"
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory, } from 'react-router-dom'
 import { createImageString } from "../ImageUploadHandler"
 import "../auth/Auth.css"
 
