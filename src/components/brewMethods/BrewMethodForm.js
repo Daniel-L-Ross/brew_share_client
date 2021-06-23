@@ -7,14 +7,17 @@ import "../auth/Auth.css"
 export const BrewMethodForm = () => {
     const history = useHistory()
     const { addBrewMethod } = useContext(BrewMethodContext)
-    const [brewMethodImage, setBrewMethodImage] = useState(""
-    )
 
+    // hold the value of any image string that is created
+    const [brewMethodImage, setBrewMethodImage] = useState("")
+
+    // manage brew method object for sending in fetch call
     const [brewMethod, setBrewMethod] = useState({
         name: "",
         website: "",
     })
 
+    // onchange, update brew method object or create an image string 
     const handleControlledInputChange = (event) => {
         if (event.target.id === "brewMethodImage") {
             createImageString(event.target.files[0], setBrewMethodImage)
@@ -25,6 +28,7 @@ export const BrewMethodForm = () => {
         }
     }
 
+    
     const handleBrewMethodSubmit = (event) => {
         event.preventDefault()
         const newBrewMethod = { ...brewMethod }

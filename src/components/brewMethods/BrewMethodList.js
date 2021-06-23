@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react"
-import { Link, userHistory, useParams, useHistory } from "react-router-dom"
+import React, { useContext, useEffect } from "react"
+import { useHistory } from "react-router-dom"
 import { BrewMethodContext } from "./BrewMethodProvider"
 
 export const BrewMethodList = () => {
