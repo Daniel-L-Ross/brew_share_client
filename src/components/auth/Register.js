@@ -19,6 +19,7 @@ export const Register = (props) => {
 
     const history = useHistory()
     
+    // if a user uploads an image, create a base64 string to be sent to the server
     const updateImageString = (event) => {
         createImageString(event.target.files[0], setImageString)
     }
@@ -52,7 +53,6 @@ export const Register = (props) => {
                     if ("valid" in res && res.valid) {
                         localStorage.setItem(userTokenStorageKey, res.token )
                         localStorage.setItem("username", res.username)
-                        localStorage.setItem("isAdmin", res.isAdmin)
                         history.push("/")
                     }
                 })

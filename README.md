@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# brew_share
+## Motive
+1. Utilize and expand knowledge of REACT
+1. Build a REACT client for an api I built from scratch
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## What is brew__share?
+brew_share is a digital coffee diary. Users can enter a coffee they've brewed, and the specific steps they followed. I enjoy trying different varieties of coffee, and have several different ways of brewing coffee (aeropress, chemex, single-serve pourover), but it can be hard to remember what combinations yielded the best results. brew_share aims to provide an easy place to journal your daily coffee. 
 
-## Available Scripts
+## Installation Instructions
+Clone brew_share_client repository 
+```
+npm install
+npm start 
+```
+### Server
+Instructions for setting up a the local server for this app cna be found here: [brew_share_server](https://github.com/Daniel-L-Ross/brew_share).
+## Features
+* Add coffee varieties and brew methods to site
+* Create, update, and delete entries
+* Add detailed steps per entry along with photos
+* Search publicly available entries
 
-In the project directory, you can run:
+## Wireframe
+### Login & Register
+![login-register](./ReadmeImages/login-register.png)
 
-### `npm start`
+### Entries
+![entries](./ReadmeImages/entries.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Coffee
+![coffee](./ReadmeImages/coffee.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Brew Methods
+![method](./ReadmeImages/methods.png)
 
-### `npm test`
+## Support
+Fill out a support ticket if you discover any major bugs to address. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Roadmap
+In its current state, the app is functional but does not have a mobile-first design. My next feature w
+Planned features include:
+### Recipes & Recommend 
+![recommend](./ReadmeImages/recommend.png)
 
-### `npm run build`
+* This feature would allow users to convert their entries into "Recipes" for other users to review.
+* Admin users would be able nominate recipes to be listed as "recommended"
+* Recommended would be available as a search/filter option
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Report
+![report](./ReadmeImages/report.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* This feature would allow users to report posts if they believe the content is not appropriate for the brew_share platform. 
+* Admin could resolve a report and choose to block the corresponding post so it does not show up in other users searches
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### User list
+![users](./ReadmeImages/users.png)
 
-### `npm run eject`
+* This feature would allow admin users to see details on all users in the system
+* Admin could ban a user if they choose so they no longer have access to the system
+ 
+## Contributing
+Feel free to fork the repository and make pull requests. There is currently no plan to maintain this project, but I may work on it from time to time. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Acknowledgements
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Special thanks to my project manager [Jayna Leitze](https://github.com/JaynaLeitze) for her guidance and encouragement to help get this project completed on time.  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+Open Source project. 

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect } from "react"
 import { Link, useHistory, useParams } from "react-router-dom"
 import { EntryContext } from "./EntryProvider"
 import "./Entry.css"
@@ -21,6 +21,7 @@ export const EntryDetail = () => {
         }
     }
 
+    // send fetch call to create or delete a favorite association
     const handleToggleFavorite = () => {
         if (entry.favorite) {
             deleteFavoriteEntry(entryId)
@@ -33,11 +34,13 @@ export const EntryDetail = () => {
         }
     }
 
+    // send fetch call to toggle privacy
     const handleTogglePrivacy = () => {
         togglePrivacy(entryId)
             .then(() => getSingleEntry(entryId))
     }
 
+    // manage what buttons should be displayed on the post based on current users edit privileges 
     const buttonBar = () => {
         return (entry.edit_allowed) ?
             <>

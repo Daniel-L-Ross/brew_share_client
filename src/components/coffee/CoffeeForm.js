@@ -1,15 +1,17 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useState } from "react"
 import { CoffeeContext } from "./CoffeeProvider"
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory, } from 'react-router-dom'
 import { createImageString } from "../ImageUploadHandler"
 import "../auth/Auth.css"
 
 export const CoffeeForm = () => {
     const history = useHistory()
     const { addCoffee } = useContext(CoffeeContext)
-    const [coffeeImage, setCoffeeImage] = useState(""
-    )
 
+    // manage base64 image string if created
+    const [coffeeImage, setCoffeeImage] = useState("")
+
+    // manage coffee object for sending in fetch call
     const [coffee, setCoffee] = useState({
         roaster: "",
         name: "",
@@ -21,6 +23,7 @@ export const CoffeeForm = () => {
         tastingNotes: "",
     })
 
+    // onchange, update coffee state variable or image string state variable
     const handleControlledInputChange = (event) => {
         if (event.target.id === "coffeeImage") {
             createImageString(event.target.files[0], setCoffeeImage)

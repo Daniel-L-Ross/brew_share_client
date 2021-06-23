@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react"
-import { Link, userHistory, useParams, useHistory } from "react-router-dom"
+import React, { useContext, useEffect } from "react"
+import { Link, useHistory } from "react-router-dom"
 import { CoffeeContext } from "./CoffeeProvider"
 
 export const CoffeeList = () => {

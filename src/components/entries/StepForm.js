@@ -52,6 +52,7 @@ export const StepForm = () => {
 
     const handleStepSubmit = (stepObject) => {
         stepObject.entryId = entryId
+        stepObject.stepImage = imageString
         if (addMode) {
             addStep(stepObject)
                 .then(() => history.push(`/entries/${entryId}/detail`))
