@@ -38,10 +38,21 @@ export const SearchBar = () => {
 
     const updateSearch = () => {
         let queryParams = ""
+        const oneParamExists = (queryParams.includes("?") || baseSearchUrl().includes("?"))
         if (searchTerm.length) {
-            queryParams += `${searchTerm}`
+            oneParamExists ? queryParams += `&searchterm=${searchTerm}` 
+            : queryParams += `?searchterm=${searchTerm}`
         }
-        console.log(queryParams)
+        if (filters.coffee > 0){
+            oneParamExists ? queryParams += `&coffee=${filters.coffee}` 
+            : queryParams += `?coffee=${filters.coffee}`
+        }
+        if (filters.method > 0){
+            oneParamExists ? queryParams += `&method=${filters.method}` 
+            : queryParams += `?method=${filters.method}`
+        }
+        const searchUrl = baseSearchUrl() + queryParams
+        getEntries(searchUrl)
     }
 
     //TODO: handle base url here
@@ -72,7 +83,7 @@ export const SearchBar = () => {
             <input className="" type="text" id="searchTerm" placeholder="Search posts..." value={searchTerm} onChange={handleInputChange} />
             <label htmlFor="coffee"> Coffee </label>
             <select className="" id="coffee" value={filters.coffee} onChange={handleInputChange}>
-                <option value="">Filter by Coffee</option>
+                <option value={0}>Filter by Coffee</option>
                 {
                     coffees.map(coffee => {
                         return <option value={coffee.id} key={`coffee--${coffee.id}`}>{coffee.roaster} {coffee.name}</option>
@@ -81,7 +92,7 @@ export const SearchBar = () => {
             </select>
             <label htmlFor="method"> Brew Method </label>
             <select className="" id="method" value={filters.method} onChange={handleInputChange}>
-                <option value="">Filter by Brewing Method</option>
+                <option value={0}>Filter by Brewing Method</option>
                 {
                     brewMethods.map(method => {
                         return <option value={method.id} key={`method--${method.id}`}>{method.name}</option>

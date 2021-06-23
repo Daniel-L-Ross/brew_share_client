@@ -6,7 +6,6 @@ import { EntrySteps } from "./EntrySteps"
 
 export const EntryDetail = () => {
     const { entry, getSingleEntry, addFavoriteEntry, deleteFavoriteEntry, deleteEntry, togglePrivacy } = useContext(EntryContext)
-    // const [entry, setEntry] = useState({})
     const { entryId } = useParams()
 
     const history = useHistory()

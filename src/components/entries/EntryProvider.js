@@ -107,7 +107,7 @@ export const EntryProvider = (props) => {
     return (
         <EntryContext.Provider value={{
             entries, entry, getEntries, getSingleEntry, addEntry, updateEntry, addFavoriteEntry, deleteFavoriteEntry, 
-            deleteEntry, getFavoriteEntries, togglePrivacy, addStep, updateStep, deleteStep, setEntry
+            deleteEntry, getFavoriteEntries, togglePrivacy, addStep, updateStep, deleteStep
         }}>
             {props.children}
         </EntryContext.Provider>
