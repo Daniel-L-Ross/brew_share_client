@@ -19,7 +19,7 @@ export const CoffeeDetail = () => {
                     <div>
                         <h2>{coffee.roaster} {coffee.name}</h2>
                         <a href={coffee.website}>
-                            <img src={coffee.coffee_image}></img>
+                            <img style={{ maxWidth: `15em` }} src={coffee.coffee_image} alt={coffee.name}></img>
                         </a>
                         <p>Country: {coffee.country}</p>
                         <p>Region: {coffee.region}</p>
