@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import { Link, useParams, useLocation } from "react-router-dom"
+import { useParams, useLocation } from "react-router-dom"
 import { CoffeeContext } from "../coffee/CoffeeProvider"
 import { BrewMethodContext } from "../brewMethods/BrewMethodProvider"
 import { EntryContext } from "./EntryProvider"
