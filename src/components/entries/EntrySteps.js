@@ -41,7 +41,7 @@ export const EntrySteps = ({ entry }) => {
                                     <p>{step.instruction}</p>
                                     {actionButtons(step)}
                                     </div>
-                                    <img style={{ maxWidth: `15em` }} src={step.step_image}></img>
+                                    <img style={{ maxWidth: `15em` }} src={step.step_image} alt="image of step"></img>
                                 </div>
                             })}
                         </div>
