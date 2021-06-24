@@ -1,8 +1,7 @@
 import React, { useRef } from "react"
 import { Link, useHistory } from "react-router-dom"
-import { userTokenStorageKey } from "./authSettings"
+import { authApi, userTokenStorageKey } from "./authSettings"
 import "./Auth.css"
-import { apiSettings } from "../Settings"
 
 
 export const Login = () => {
@@ -14,7 +13,7 @@ export const Login = () => {
     const handleLogin = (e) => {
         e.preventDefault()
 
-        return fetch(`${apiSettings.baseUrl}/login`, {
+        return fetch(`${authApi.localApiBaseUrl}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -47,7 +46,7 @@ export const Login = () => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>brew_share</h1>
+                    <h1>Rare Publishing</h1>
                     <h2>Please sign in</h2>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>

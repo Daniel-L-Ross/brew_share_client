@@ -1,10 +1,8 @@
 import React, { useRef, useState } from "react"
 import { Link, useHistory } from "react-router-dom"
-import { userTokenStorageKey } from "./authSettings"
-import { apiSettings } from "../Settings"
+import { authApi, userTokenStorageKey } from "./authSettings"
 import { createImageString } from "../ImageUploadHandler"
 import "./Auth.css"
-
 
 export const Register = (props) => {
     const firstName = useRef()
@@ -42,7 +40,7 @@ export const Register = (props) => {
                 "password": password.current.value,
             }
 
-            return fetch(`${apiSettings.baseUrl}/register`, {
+            return fetch(`${authApi.localApiBaseUrl}/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

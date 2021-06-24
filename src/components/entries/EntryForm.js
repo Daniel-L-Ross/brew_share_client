@@ -52,7 +52,7 @@ export const EntryForm = () => {
         }
     }, [entry])
 
-    // react-hook-fork calls this function and passed the entryObject after validating form data
+    // react-hook-fork calls this function and passed the entryObject after validatin form data
     const handleEntrySubmit = (entryObject) => {
         if (addMode) {
             addEntry(entryObject)

@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import { Link, useParams, useLocation } from "react-router-dom"
 import { EntryContext } from "./EntryProvider"
 import { SearchBar } from "./SearchBar"
