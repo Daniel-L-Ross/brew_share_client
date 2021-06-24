@@ -18,7 +18,7 @@ export const BrewMethodList = () => {
                     return <div key={`brewMethod--${method.id}`}>
                         <h3>{method.name}</h3>
                         <a href={method.website}>
-                            <img style={{ maxWidth: `15em` }} src={method.method_image}></img>
+                            <img style={{ maxWidth: `15em` }} src={method.method_image} alt={method.name}></img>
                         </a>
                     </div>
                 })

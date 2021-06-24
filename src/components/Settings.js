@@ -9,5 +9,5 @@ export const apiHeaders = () => {
 
 
 export const apiSettings = {
-    baseUrl: "http://localhost:8000"
+    baseUrl: "https://brewshare.herokuapp.com"
 }
