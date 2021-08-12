@@ -3,6 +3,7 @@ import { CoffeeContext } from "./CoffeeProvider"
 import { useHistory, } from 'react-router-dom'
 import { createImageString } from "../ImageUploadHandler"
 import "../auth/Auth.css"
+// TODO: useForm to validate
 
 export const CoffeeForm = () => {
     const history = useHistory()
