@@ -10,54 +10,54 @@ const handleLogout = () => {
 export const NavBar = () => {
 
     return (
-        <ul className="navbar">
-            <li className="navbar__item">
+        <nav className="navbar sticky">
+            <div className="navbar__item">
                 <Link to="/">
                     brew_share
                 </Link>
-            </li>
+            </div>
 
-            <li className="navbar__item">
+            <div className="navbar__item">
                 <Link to="/">
                     Entries
                 </Link>
-            </li>
+            </div>
 
-            <li className="navbar__item">
+            <div className="navbar__item">
                 <Link to="/entries/create">
                     Add Entry
                 </Link>
-            </li>
+            </div>
 
-            <li className="navbar__item">
+            <div className="navbar__item">
                 <Link to={`/${username()}/my-entries`}>
-                My Entries
+                    My Entries
                 </Link>
-                </li>
+            </div>
 
-            <li className="navbar__item">
+            <div className="navbar__item">
                 <Link to={`/${username()}/favorites`}>
-                My Favorites
+                    My Favorites
                 </Link>
-                </li>
+            </div>
 
-            <li className="navbar__item">
+            <div className="navbar__item">
                 <Link to="/coffee">
                     Coffee
                 </Link>
-            </li>
+            </div>
 
-            <li className="navbar__item">
+            <div className="navbar__item">
                 <Link to="/brew-methods">
                     Brew Methods
                 </Link>
-            </li>
+            </div>
 
-            <a href="/" onClick={handleLogout}>
-                <li className="navbar__item" >
+            <div className="navbar__item" >
+                <a href="/" onClick={handleLogout}>
                     Logout
-                </li>
-            </a>
-        </ul>
+                </a>
+            </div>
+        </nav>
     )
 }

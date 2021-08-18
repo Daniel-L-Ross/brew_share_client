@@ -21,7 +21,7 @@ export const EntryList = () => {
     }
 
     return (
-        <>
+        <div className="content">
             <h2>{pageTitle()}</h2>
             <SearchBar />
             {
@@ -35,6 +35,6 @@ export const EntryList = () => {
                     </div>
                 })
             }
-        </>
+        </div>
     )
 }

@@ -8,6 +8,10 @@ textarea {
     color: red
 }
 
+.content {
+	padding-top: 1em;
+}
+
 /* entry toggle switch */
 .switch {
 	position: relative;
