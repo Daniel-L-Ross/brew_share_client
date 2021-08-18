@@ -13,17 +13,18 @@ import { BrewMethodList } from "./brewMethods/BrewMethodList"
 import { BrewMethodForm } from "./brewMethods/BrewMethodForm"
 import { EntryForm } from "./entries/EntryForm"
 import { StepForm } from "./entries/StepForm"
+import { IonReactRouter } from "@ionic/react-router"
+import { IonRouterOutlet } from "@ionic/react"
 
 
 export const ApplicationViews = () => {
     return <>
 
         <NavBar />
-
         <EntryProvider>
             <CoffeeProvider>
                 <BrewMethodProvider>
-                
+
                     <Route exact path="/">
                         <EntryList />
                     </Route>

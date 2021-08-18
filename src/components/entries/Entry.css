@@ -1,15 +1,15 @@
 /* entry form */
-textarea {
+/* textarea {
 	min-height: 5em;
 	max-height: 50vh;
 }
 
 .error-message {
     color: red
-}
+} */
 
 /* entry toggle switch */
-.switch {
+/* .switch {
 	position: relative;
 	display: inline-block;
 	width: 60px;
@@ -59,13 +59,13 @@ textarea {
 	-ms-transform: translateX(26px);
 	transform: translateX(26px);
   }
-  
+   */ 
   /* Rounded sliders */
-  .slider.round {
+  /* .slider.round {
 	border-radius: 34px;
   }
   
   .slider.round:before {
 	border-radius: 50%;
-  }
-/* end copied css for slider */
+  } */
+ /* end copied css for slider  */
