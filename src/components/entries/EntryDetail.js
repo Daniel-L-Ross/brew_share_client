@@ -1,7 +1,8 @@
+
 import React, { useContext, useEffect } from "react"
+import { ButtonGroup, Button, Card, Container } from "react-bootstrap"
 import { Link, useHistory, useParams } from "react-router-dom"
 import { EntryContext } from "./EntryProvider"
-import "./Entry.css"
 import { EntrySteps } from "./EntrySteps"
 
 export const EntryDetail = () => {
@@ -39,52 +40,56 @@ export const EntryDetail = () => {
         togglePrivacy(entryId)
             .then(() => getSingleEntry(entryId))
     }
-
     // manage what buttons should be displayed on the post based on current users edit privileges 
     const buttonBar = () => {
         return (entry.edit_allowed) ?
-            <>
+            <div>
                 <p>{entry.private ? "Private" : "Public"}</p>
                 <label className="switch">
                     <input type="checkbox" checked={entry.private} onChange={handleTogglePrivacy} />
                     <span className="slider round"></span>
                 </label>
 
-                <button onClick={handleDelete}>Delete Entry</button>
+                <Button onClick={handleDelete}>Delete Entry</Button>
 
                 <Link to={`/entries/${entry.id}/edit`}>
-                    <button >Edit Entry</button>
+                    <Button >Edit Entry</Button>
                 </Link>
 
                 <Link to={`/entries/${entry.id}/steps/add`}>
-                    <button >Add step</button>
+                    <Button >Add step</Button>
                 </Link>
 
-                <button onClick={handleToggleFavorite}>{entry.favorite ? "Unfavorite" : "Favorite"}</button>
-            </>
-            : <button onClick={handleToggleFavorite}>{entry.favorite ? "Unfavorite" : "Favorite"}</button>
+                <Button onClick={handleToggleFavorite}>{entry.favorite ? "Unfavorite" : "Favorite"}</Button>
+            </div>
+            : <Button onClick={handleToggleFavorite}>{entry.favorite ? "Unfavorite" : "Favorite"}</Button>
     }
 
     return (
-        <>
+        <Container>
             {
                 entry.id &&
-                <div>
+                <Card className="mt-4" bg="light">
                     {/* TODO: add links to brew method and coffee */}
-                    <h2> {entry.brewer.user.first_name}'s {entry.title}</h2>
-                    <p>Notes: {entry.review}</p>
-                    <p>Rating: {entry.rating}/5</p>
-                    <p>Tasting-notes: {entry.tasting_notes}</p>
-                    <p>Brewing: {entry.coffee.roaster} {entry.coffee.name}</p>
-                    <p>Grind size: {entry.grind_size}</p>
-                    <p>Method: {entry.method.name}</p>
-                    <p>Water: {entry.water_volume}g at {entry.water_temp} F</p>
-                    <h3>Setup</h3>
-                    <p>{entry.setup}</p>
-                    <EntrySteps entry={entry} />
-                    {buttonBar()}
-                </div>
+                    <Card.Header as="h2"> {entry.brewer.user.first_name}'s {entry.title}</Card.Header>
+                    <Card.Body>
+                        <Card.Text>
+                            <p><b>Notes:</b> {entry.review}</p>
+                            <p><b>Rating:</b> {entry.rating}/5</p>
+                            <p><b>Tasting-notes:</b> {entry.tasting_notes}</p>
+                            <p><b>Brewing:</b> {entry.coffee.roaster} {entry.coffee.name}</p>
+                            <p><b>Grind size:</b> {entry.grind_size}</p>
+                            <p><b>Method:</b> {entry.method.name}</p>
+                            <p><b>Water:</b> {entry.water_volume}g at {entry.water_temp} F</p>
+                            <h3>Setup</h3>
+                            <p>{entry.setup}</p>
+                            <EntrySteps entry={entry} />
+                        </Card.Text>
+                        {buttonBar()}
+                        <Button onClick={handleToggleFavorite}>{entry.favorite ? "Unfavorite" : "Favorite"}</Button>
+                    </Card.Body>
+                </Card>
             }
-        </>
+        </Container>
     )
 }

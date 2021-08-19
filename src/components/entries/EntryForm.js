@@ -5,7 +5,6 @@ import { BrewMethodContext } from "../brewMethods/BrewMethodProvider"
 import { useHistory, useParams } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import "../auth/Auth.css"
-import "./Entry.css"
 
 export const EntryForm = () => {
     const history = useHistory()

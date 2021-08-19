@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form"
 import { EntrySteps } from "./EntrySteps"
 import { createImageString } from "../ImageUploadHandler"
 import "../auth/Auth.css"
-import "./Entry.css"
 
 export const StepForm = () => {
     const history = useHistory()
