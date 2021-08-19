@@ -2,8 +2,7 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: left;
-    background-color: antiquewhite;
-    padding: .5em;
+ 
 }
 
 .navbar__item {
@@ -13,10 +12,4 @@
 
 .navbar__logo {
     max-height: 6rem;
-}
-
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%
 }

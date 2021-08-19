@@ -47,6 +47,7 @@ export const NavBar = () => {
                                     </Link>
                                 </div>
                             </NavDropdown.Item>
+                            
                             <NavDropdown.Item>
                                 <div className="navbar__item">
                                     <Link to={`/${username()}/favorites`}>
@@ -55,23 +56,29 @@ export const NavBar = () => {
                                 </div>
                             </NavDropdown.Item>
 
-                            <div className="navbar__item">
-                                <Link to="/coffee">
-                                    Coffee
-                                </Link>
-                            </div>
+                            <NavDropdown.Item>
+                                <div className="navbar__item">
+                                    <Link to="/coffee">
+                                        Coffee
+                                    </Link>
+                                </div>
+                            </NavDropdown.Item>
 
-                            <div className="navbar__item">
-                                <Link to="/brew-methods">
-                                    Brew Methods
-                                </Link>
-                            </div>
+                            <NavDropdown.Item>
+                                <div className="navbar__item">
+                                    <Link to="/brew-methods">
+                                        Brew Methods
+                                    </Link>
+                                </div>
+                            </NavDropdown.Item>
 
-                            <div className="navbar__item" >
-                                <a href="/" onClick={handleLogout}>
-                                    Logout
-                                </a>
-                            </div>
+                            <NavDropdown.Item>
+                                <div className="navbar__item" >
+                                    <a href="/" onClick={handleLogout}>
+                                        Logout
+                                    </a>
+                                </div>
+                            </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>

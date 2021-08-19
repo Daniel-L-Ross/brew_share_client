@@ -3,6 +3,7 @@ import { Link, useParams, useLocation } from "react-router-dom"
 import { CoffeeContext } from "../coffee/CoffeeProvider"
 import { BrewMethodContext } from "../brewMethods/BrewMethodProvider"
 import { EntryContext } from "./EntryProvider"
+import { Button, Form, Navbar, Row, Col, InputGroup, FormControl } from "react-bootstrap"
 
 export const SearchBar = () => {
     const { getCoffees, coffees } = useContext(CoffeeContext)
@@ -19,7 +20,7 @@ export const SearchBar = () => {
 
     const location = useLocation()
     const { username } = useParams()
-    
+
     // determine the base url based on the route and params
     const baseSearchUrl = () => {
         if (username && location.pathname.includes("favorites")) {
@@ -43,16 +44,16 @@ export const SearchBar = () => {
         let queryParams = ""
         const oneParamExists = (queryParams.includes("?") || baseSearchUrl().includes("?"))
         if (searchTerm.length) {
-            oneParamExists ? queryParams += `&searchterm=${searchTerm}` 
-            : queryParams += `?searchterm=${searchTerm}`
+            oneParamExists ? queryParams += `&searchterm=${searchTerm}`
+                : queryParams += `?searchterm=${searchTerm}`
         }
-        if (filters.coffee > 0){
-            oneParamExists ? queryParams += `&coffee=${filters.coffee}` 
-            : queryParams += `?coffee=${filters.coffee}`
+        if (filters.coffee > 0) {
+            oneParamExists ? queryParams += `&coffee=${filters.coffee}`
+                : queryParams += `?coffee=${filters.coffee}`
         }
-        if (filters.method > 0){
-            oneParamExists ? queryParams += `&method=${filters.method}` 
-            : queryParams += `?method=${filters.method}`
+        if (filters.method > 0) {
+            oneParamExists ? queryParams += `&method=${filters.method}`
+                : queryParams += `?method=${filters.method}`
         }
         const searchUrl = baseSearchUrl() + queryParams
         getEntries(searchUrl)
@@ -79,29 +80,57 @@ export const SearchBar = () => {
     }
 
     return (
-        <>
-            <p>SEARCH: </p>
-            <input className="" type="text" id="searchTerm" placeholder="Search posts..." value={searchTerm} onChange={handleInputChange} />
-            <label htmlFor="coffee"> Coffee </label>
-            <select className="" id="coffee" value={filters.coffee} onChange={handleInputChange}>
-                <option value={0}>Filter by Coffee</option>
-                {
-                    coffees.map(coffee => {
-                        return <option value={coffee.id} key={`coffee--${coffee.id}`}>{coffee.roaster} {coffee.name}</option>
-                    })
-                }
-            </select>
-            <label htmlFor="method"> Brew Method </label>
-            <select className="" id="method" value={filters.method} onChange={handleInputChange}>
-                <option value={0}>Filter by Brewing Method</option>
-                {
-                    brewMethods.map(method => {
-                        return <option value={method.id} key={`method--${method.id}`}>{method.name}</option>
-                    })
-                }
-            </select>
-            <button onClick={updateSearch}>Update Search</button>
-            <button onClick={clearSearch}>Clear Search</button>
-        </>
+        <Form>
+            <Row>
+                <Col>
+                    <InputGroup>
+                        <InputGroup.Prepend>
+                            <InputGroup.Text>
+                                Search:
+                            </InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <FormControl className="" type="text" id="searchTerm" placeholder="Search posts..." value={searchTerm} onChange={handleInputChange} />
+                    </InputGroup>
+                </Col>
+                <Col>
+                    <InputGroup>
+                        <InputGroup.Prepend>
+                            <InputGroup.Text>
+                                Coffee
+                            </InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <Form.Control as="select" className="" id="coffee" value={filters.coffee} onChange={handleInputChange}>
+                            <option value={0}>Filter by Coffee</option>
+                            {
+                                coffees.map(coffee => {
+                                    return <option value={coffee.id} key={`coffee--${coffee.id}`}>{coffee.roaster} {coffee.name}</option>
+                                })
+                            }
+                        </Form.Control>
+                    </InputGroup>
+                </Col>
+                <Col>
+                    <InputGroup>
+                        <InputGroup.Prepend>
+                            <InputGroup.Text>
+                                Brew Method:
+                            </InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <Form.Control as="select" className="" id="method" value={filters.method} onChange={handleInputChange}>
+                            <option value={0}>Filter by Brewing Method</option>
+                            {
+                                brewMethods.map(method => {
+                                    return <option value={method.id} key={`method--${method.id}`}>{method.name}</option>
+                                })
+                            }
+                        </Form.Control>
+                    </InputGroup>
+                </Col>
+                <Col>
+                    <Button variant="outline-success" onClick={updateSearch}>Update Search</Button>
+                    <Button variant="outline-secondary" onClick={clearSearch}>Clear Search</Button>
+                </Col>
+            </Row>
+        </Form>
     )
 }
