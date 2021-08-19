@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react"
+import { Card, Container } from "react-bootstrap"
 import { Link, useParams, useLocation } from "react-router-dom"
 import { EntryContext } from "./EntryProvider"
 import { SearchBar } from "./SearchBar"
@@ -19,22 +20,24 @@ export const EntryList = () => {
             return "Entries"
         }
     }
-
     return (
-        <div className="content">
+        <Container >
             <h2>{pageTitle()}</h2>
             <SearchBar />
             {
                 entries.length && entries.map(entry => {
-                    return <div key={`entry--${entry.id}`}>
+                    return <Card key={`entry--${entry.id}`} className="mt-4">
                         <Link to={`/entries/${entry.id}/detail`}>
-                            <h3>{entry.title} | {entry.brewer.user.first_name} {entry.brewer.user.last_name}</h3>
+                            <Card.Header as="h3">{entry.title} | {entry.brewer.user.first_name} {entry.brewer.user.last_name}</Card.Header>
                         </Link>
-
-                        <p>{entry.coffee.roaster} {entry.coffee.name} - {entry.method.name}</p>
-                    </div>
+                        <Card.Body>
+                            <Card.Text>
+                                {entry.coffee.roaster} {entry.coffee.name} - {entry.method.name}
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
                 })
             }
-        </div>
+        </Container>
     )
 }

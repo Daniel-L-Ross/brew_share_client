@@ -82,7 +82,7 @@ export const SearchBar = () => {
     return (
         <Form>
             <Row>
-                <Col>
+                <Col sm={12} md={3} >
                     <InputGroup>
                         <InputGroup.Prepend>
                             <InputGroup.Text>
@@ -92,7 +92,7 @@ export const SearchBar = () => {
                         <FormControl className="" type="text" id="searchTerm" placeholder="Search posts..." value={searchTerm} onChange={handleInputChange} />
                     </InputGroup>
                 </Col>
-                <Col>
+                <Col sm={12} md={3}>
                     <InputGroup>
                         <InputGroup.Prepend>
                             <InputGroup.Text>
@@ -109,7 +109,7 @@ export const SearchBar = () => {
                         </Form.Control>
                     </InputGroup>
                 </Col>
-                <Col>
+                <Col sm={12} md={3}>
                     <InputGroup>
                         <InputGroup.Prepend>
                             <InputGroup.Text>
@@ -126,7 +126,7 @@ export const SearchBar = () => {
                         </Form.Control>
                     </InputGroup>
                 </Col>
-                <Col>
+                <Col sm={12} md={3}>
                     <Button variant="outline-success" onClick={updateSearch}>Update Search</Button>
                     <Button variant="outline-secondary" onClick={clearSearch}>Clear Search</Button>
                 </Col>
