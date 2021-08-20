@@ -1,6 +1,5 @@
-
 import React, { useContext, useEffect } from "react"
-import { ButtonGroup, Button, Card, Container, Row, Col } from "react-bootstrap"
+import { ButtonGroup, Button, Card, Container, Row, Col, InputGroup, Dropdown } from "react-bootstrap"
 import { Link, useHistory, useParams } from "react-router-dom"
 import { EntryContext } from "./EntryProvider"
 import { EntrySteps } from "./EntrySteps"
@@ -43,23 +42,36 @@ export const EntryDetail = () => {
     // manage what buttons should be displayed on the post based on current users edit privileges 
     const buttonBar = () => {
         return (entry.edit_allowed) ?
-            <div>
-                <p>{entry.private ? "Private" : "Public"}</p>
-                <label className="switch">
-                    <input type="checkbox" checked={entry.private} onChange={handleTogglePrivacy} />
-                    <span className="slider round"></span>
-                </label>
+            <Row>
+                <Col xs={8}>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text>
+                            Visibility: 
+                        </InputGroup.Text>
+                        <Button onClick={handleTogglePrivacy}>{entry.private ? "Private" : "Public"}</Button>
+                    </InputGroup>
+                </Col>
+                <Col xs={2}>
 
-                <Button onClick={handleDelete}>Delete Entry</Button>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            More...
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
 
-                <Link to={`/entries/${entry.id}/edit`}>
-                    <Button >Edit Entry</Button>
-                </Link>
+                            <Button variant="danger" onClick={handleDelete}>Delete Entry</Button>
 
-                <Link to={`/entries/${entry.id}/steps/add`}>
-                    <Button >Add step</Button>
-                </Link>
-            </div>
+                            <Link to={`/entries/${entry.id}/edit`}>
+                                <Button variant="secondary">Edit Entry</Button>
+                            </Link>
+
+                            <Link to={`/entries/${entry.id}/steps/add`}>
+                                <Button >Add step</Button>
+                            </Link>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </Col>
+            </Row>
             : <> </>
     }
 
@@ -80,6 +92,7 @@ export const EntryDetail = () => {
                         </Row>
                     </Card.Header>
                     <Card.Body>
+                        {buttonBar()}
                         <Card.Text>
                             <p><b>Notes:</b> {entry.review}</p>
                             <p><b>Rating:</b> {entry.rating}/5</p>
@@ -90,9 +103,8 @@ export const EntryDetail = () => {
                             <p><b>Water:</b> {entry.water_volume}g at {entry.water_temp} F</p>
                             <h3>Setup</h3>
                             <p>{entry.setup}</p>
-                            <EntrySteps entry={entry} />
                         </Card.Text>
-                        {buttonBar()}
+                        <EntrySteps entry={entry} />
 
                     </Card.Body>
                 </Card>

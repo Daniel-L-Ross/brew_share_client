@@ -1,6 +1,7 @@
 import React, { useContext } from "react"
 import { Link } from "react-router-dom"
 import { EntryContext } from "./EntryProvider"
+import { convertSeconds } from "../secondsConverter"
 
 // deleteStep
 export const EntrySteps = ({ entry }) => {
@@ -31,17 +32,16 @@ export const EntrySteps = ({ entry }) => {
             {
                 (steps?.length >= 1) ?
                     <>
-                        <h2>STEPS</h2>
+                        <h3>STEPS</h3>
                         <div>
                             {steps.map(step => {
                                 return <div key={`step--${step.id}`}>
                                     <div>
-                                    <p>{step.seconds}</p>
-                                    <p>{step.descriptor}</p>
-                                    <p>{step.instruction}</p>
-                                    {actionButtons(step)}
+                                        
+                                    <p>{convertSeconds(step.seconds)} {step.descriptor} {step.instruction}</p>
                                     </div>
                                     <img style={{ maxWidth: `15em` }} src={step.step_image}></img>
+                                    {actionButtons(step)}
                                 </div>
                             })}
                         </div>
