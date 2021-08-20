@@ -54,7 +54,7 @@ export const EntryDetail = () => {
                 <Col xs={2}>
 
                     <Dropdown>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        <Dropdown.Toggle variant="info" id="dropdown-basic">
                             More...
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
@@ -62,7 +62,7 @@ export const EntryDetail = () => {
                             <Button variant="danger" onClick={handleDelete}>Delete Entry</Button>
 
                             <Link to={`/entries/${entry.id}/edit`}>
-                                <Button variant="secondary">Edit Entry</Button>
+                                <Button variant="success">Edit Entry</Button>
                             </Link>
 
                             <Link to={`/entries/${entry.id}/steps/add`}>
