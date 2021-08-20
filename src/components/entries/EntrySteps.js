@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import { Link } from "react-router-dom"
 import { EntryContext } from "./EntryProvider"
 import { convertSeconds } from "../secondsConverter"
-import { Accordion, Button, ButtonGroup, Card, Container, Image, InputGroup, ListGroup } from "react-bootstrap"
+import { Accordion, Button, ButtonGroup, Card, Container, Image, InputGroup, ListGroup, Table } from "react-bootstrap"
 
 // deleteStep
 export const EntrySteps = ({ entry }) => {
@@ -30,37 +30,47 @@ export const EntrySteps = ({ entry }) => {
             </div>
             : <> </>
     }
-
+let stepCount = 0
     return (
         <>
             {
                 (steps?.length >= 1) ?
                     <>
-                        <h3>STEPS</h3>
-                        <div>
                             {steps.map(step => {
-                                return <ListGroup key={`step--${step.id}`}>
-                                    <ListGroup.Item>
+                                stepCount += 1
+                                return <ListGroup.Item key={`step--${step.id}`}>
+                                    <h3>Step {stepCount}</h3>
 
-                                        <InputGroup className="mb-2">
-
-                                            <InputGroup.Text>
-                                                {convertSeconds(step.seconds)}
-                                            </InputGroup.Text>
-                                            <InputGroup.Text>
-                                                {step.descriptor}
-                                            </InputGroup.Text>
-                                            <InputGroup.Text>
-                                                {step.instruction}
-                                            </InputGroup.Text>
-
-                                        </InputGroup>
+                                        <Table striped bordered variant="light">
+                                            <thead>
+                                                <tr>
+                                                    <th >
+                                                        TIME
+                                                    </th>
+                                                    <th>
+                                                        ACTION
+                                                    </th>
+                                                    <th>
+                                                        DETAIL
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td >
+                                                        {convertSeconds(step.seconds)}
+                                                    </td>
+                                                    <td>
+                                                        {step.descriptor}
+                                                    </td>
+                                                    <td>
+                                                        {step.instruction}
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                        </Table>
                                         <Image className="rounded mx-auto d-block" style={{ maxWidth: `15em` }} src={step.step_image} />
                                         {actionButtons(step)}
                                     </ListGroup.Item>
-                                </ListGroup>
                             })}
-                        </div>
                     </>
                     : <></>
             }

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react"
-import { ButtonGroup, Button, Card, Container, Row, Col, InputGroup, Dropdown } from "react-bootstrap"
+import { ButtonGroup, Button, Card, Container, Row, Col, InputGroup, Dropdown, ListGroup } from "react-bootstrap"
 import { Link, useHistory, useParams } from "react-router-dom"
 import { EntryContext } from "./EntryProvider"
 import { EntrySteps } from "./EntrySteps"
@@ -46,7 +46,7 @@ export const EntryDetail = () => {
                 <Col xs={8}>
                     <InputGroup className="mb-3">
                         <InputGroup.Text>
-                            Visibility: 
+                            Visibility:
                         </InputGroup.Text>
                         <Button onClick={handleTogglePrivacy}>{entry.private ? "Private" : "Public"}</Button>
                     </InputGroup>
@@ -93,18 +93,26 @@ export const EntryDetail = () => {
                     </Card.Header>
                     <Card.Body>
                         {buttonBar()}
-                        <Card.Text>
-                            <p><b>Notes:</b> {entry.review}</p>
-                            <p><b>Rating:</b> {entry.rating}/5</p>
-                            <p><b>Tasting-notes:</b> {entry.tasting_notes}</p>
-                            <p><b>Brewing:</b> {entry.coffee.roaster} {entry.coffee.name}</p>
-                            <p><b>Grind size:</b> {entry.grind_size}</p>
-                            <p><b>Method:</b> {entry.method.name}</p>
-                            <p><b>Water:</b> {entry.water_volume}g at {entry.water_temp} F</p>
-                            <h3>Setup</h3>
-                            <p>{entry.setup}</p>
-                        </Card.Text>
-                        <EntrySteps entry={entry} />
+                        <ListGroup>
+
+                            <Card.Text>
+                                <ListGroup.Item>
+                                    <h3>Detail</h3>
+                                    <p><b>Notes:</b> {entry.review}</p>
+                                    <p><b>Rating:</b> {entry.rating}/5</p>
+                                    <p><b>Tasting-notes:</b> {entry.tasting_notes}</p>
+                                    <p><b>Brewing:</b> {entry.coffee.roaster} {entry.coffee.name}</p>
+                                    <p><b>Grind size:</b> {entry.grind_size}</p>
+                                    <p><b>Method:</b> {entry.method.name}</p>
+                                    <p><b>Water:</b> {entry.water_volume}g at {entry.water_temp} F</p>
+                                </ListGroup.Item>
+                                <ListGroup.Item>
+                                <h3>Setup</h3>
+                                    <p>{entry.setup}</p>
+                                </ListGroup.Item>
+                            </Card.Text>
+                            <EntrySteps entry={entry} />
+                        </ListGroup>
 
                     </Card.Body>
                 </Card>
