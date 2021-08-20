@@ -1,6 +1,6 @@
 
 import React, { useContext, useEffect } from "react"
-import { ButtonGroup, Button, Card, Container } from "react-bootstrap"
+import { ButtonGroup, Button, Card, Container, Row, Col } from "react-bootstrap"
 import { Link, useHistory, useParams } from "react-router-dom"
 import { EntryContext } from "./EntryProvider"
 import { EntrySteps } from "./EntrySteps"
@@ -59,10 +59,8 @@ export const EntryDetail = () => {
                 <Link to={`/entries/${entry.id}/steps/add`}>
                     <Button >Add step</Button>
                 </Link>
-
-                <Button onClick={handleToggleFavorite}>{entry.favorite ? "Unfavorite" : "Favorite"}</Button>
             </div>
-            : <Button onClick={handleToggleFavorite}>{entry.favorite ? "Unfavorite" : "Favorite"}</Button>
+            : <> </>
     }
 
     return (
@@ -71,7 +69,16 @@ export const EntryDetail = () => {
                 entry.id &&
                 <Card className="mt-4" bg="light">
                     {/* TODO: add links to brew method and coffee */}
-                    <Card.Header as="h2"> {entry.brewer.user.first_name}'s {entry.title}</Card.Header>
+                    <Card.Header as="h2">
+                        <Row xs={10} >
+                            <Col xs={8} >
+                                {entry.brewer.user.first_name}'s {entry.title}
+                            </Col>
+                            <Col xs={2} >
+                                <Button className="ml-2" onClick={handleToggleFavorite}>{entry.favorite ? "Unfavorite" : "Favorite"}</Button>
+                            </Col>
+                        </Row>
+                    </Card.Header>
                     <Card.Body>
                         <Card.Text>
                             <p><b>Notes:</b> {entry.review}</p>
@@ -86,7 +93,7 @@ export const EntryDetail = () => {
                             <EntrySteps entry={entry} />
                         </Card.Text>
                         {buttonBar()}
-                        <Button onClick={handleToggleFavorite}>{entry.favorite ? "Unfavorite" : "Favorite"}</Button>
+
                     </Card.Body>
                 </Card>
             }
